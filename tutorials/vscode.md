@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "VS Code & SSH Setup Guide"
+title: "VS Code & SSH Setup"
 parent: Tutorials
-nav_order: 3
+nav_order: 6
 ---
 
 # VS Code & SSH Setup Guide
@@ -47,19 +47,19 @@ VS Code does not support SSH out of the box; you need the official extension fro
 > **Note:** When working over SSH, you must install extensions **on the Remote VM**. In the Extensions view, look for the button that says **"Install on SSH: [IP]"**.
 
 ### ROS 2 & Robotics
-* **Robot Developer Extension for URDF/Xacro**: Essential for visualizing and editing your TurtleBot 4 robot models.
-* **YAML (Red Hat)**: Provides syntax checking for ROS 2 launch files and parameter files.
+- **Robot Developer Extension for URDF/Xacro**: Essential for visualizing and editing your TurtleBot 4 robot models.
+- **YAML (Red Hat)**: Provides syntax checking for ROS 2 launch files and parameter files.
 
 ### Python & Quality Control
-* **Python (Microsoft)**: The base extension for all Python development.
-* **Pylance**: High-performance "IntelliSense" (autocompletion and type checking).
-* **Ruff**: The fastest linter and formatter available in 2026.
-* **Error Lens**: Highlights errors and warnings directly in the line of code where they occur, so you don't have to check the "Problems" tab.
+- **Python (Microsoft)**: The base extension for all Python development.
+- **Pylance**: High-performance "IntelliSense" (autocompletion and type checking).
+- **Ruff**: The fastest linter and formatter available in 2026.
+- **Error Lens**: Highlights errors and warnings directly in the line of code where they occur, so you don't have to check the "Problems" tab.
 
 ### General Productivity
-* **GitLens**: Helps you see who changed a line of code and provides a deep history of your repository.
-* **Peacock**: Changes the color of your VS Code window border. This is very helpful when you have multiple SSH windows open (e.g., one for the VM, one for the TurtleBot).
-* **Path Intellisense**: Autocompletes filenames when you are typing paths in your code.
+- **GitLens**: Helps you see who changed a line of code and provides a deep history of your repository.
+- **Peacock**: Changes the color of your VS Code window border. This is very helpful when you have multiple SSH windows open (e.g., one for the VM, one for the TurtleBot).
+- **Path Intellisense**: Autocompletes filenames when you are typing paths in your code.
 
 ---
 
@@ -81,8 +81,9 @@ To prevent data loss, always shut down the software before cutting hardware powe
     sudo shutdown now
     ```
 2.  **Close Connection:** Once the VM shuts down, VS Code will notify you that the connection was lost. You can then safely close the window.
+
 ---
 
 ## Troubleshooting & Links
-* [Official ROS 2 VS Code Setup](https://marketplace.visualstudio.com/items?itemName=Ranch-Hand-Robotics.rde-ros-2)
-* [Ruff Documentation](https://docs.astral.sh/ruff/)
+- [Official ROS 2 VS Code Setup](https://marketplace.visualstudio.com/items?itemName=Ranch-Hand-Robotics.rde-ros-2)
+- [Ruff Documentation](https://docs.astral.sh/ruff/)
