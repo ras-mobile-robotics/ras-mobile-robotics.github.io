@@ -14,16 +14,16 @@ Before diving into robotic algorithms, you need to understand the "brain" (Linux
 Linux is a family of open source Unix-like operating systems based on the Linux kernel. Unlike Windows, which is designed for general consumer use, Linux is the backbone of the internet, servers, and robotics.
 
 ### Why do we use Linux for Robotics?
-* **The Terminal:** Command-line control is faster and more scriptable than a mouse-driven GUI.
-* **Open Source:** You can modify the kernel and drivers to fit your specific hardware needs.
-* **Package Management:** ROS and its dependencies are natively distributed for Linux (specifically Ubuntu).
+- **The Terminal:** Command-line control is faster and more scriptable than a mouse-driven GUI.
+- **Open Source:** You can modify the kernel and drivers to fit your specific hardware needs.
+- **Package Management:** ROS and its dependencies are natively distributed for Linux (specifically Ubuntu).
 
 Since "Linux" is technically just the engine of an operating system, you need a full "car" to actually drive it. These different car models are called **Distributions** (or **Distros**).
 
 ### What is a Distro?
 A Linux distribution (or distro) is a bundle of software that includes:
 
-1. **The Kernel:** The "engine" (Linux kernel) that talks to the hardware.
+1. **The Kernel:** The "engine" (Linux kernel) that talks to the computer hardware.
 2. **The Shell:** The command-line interface (like Bash).
 3. **Desktop Environment:** The visual interface (icons, windows, taskbars).
 4. **Package Manager:** The "App Store" (like `apt` or `dnf`) used to install software.
@@ -31,29 +31,29 @@ A Linux distribution (or distro) is a bundle of software that includes:
 ### Why are there so many?
 Because Linux is open-source, anyone can take the kernel and build their own version. Different distros are designed for different purposes:
 
-* **User-Friendly (Ubuntu, Mint):** Designed for beginners and developers. They come with everything pre-installed.
-* **Security-Focused (Kali Linux):** Packed with tools for ethical hacking and privacy.
-* **Server-Focused (Red Hat, Debian):** Built for stability and running the world's websites.
-* **Minimalist (Arch Linux):** For experts who want to build their OS from scratch, piece by piece.
+- **User-Friendly (Ubuntu, Mint):** Designed for beginners and developers. They come with everything pre-installed.
+- **Security-Focused (Kali Linux):** Packed with tools for ethical hacking and privacy.
+- **Server-Focused (Red Hat, Debian):** Built for stability and running the world's websites.
+- **Minimalist (Arch Linux):** For experts who want to build their OS from scratch, piece by piece.
 
 ### The "Family Tree"
 
 Most distros are actually descendants of three "ancestor" projects:
 
-* **Debian:** The grandparent of **Ubuntu** (and therefore the great-grandparent of our robotics setup).
-* **Red Hat:** The base for many corporate and enterprise servers.
-* **Arch:** The base for ultra-customizable "bleeding edge" systems.
+- **Debian:** The grandparent of **Ubuntu**.
+- **Red Hat:** The base for many corporate and enterprise servers.
+- **Arch:** The base for ultra-customizable "bleeding edge" systems.
 
 > TIP: It's worth taking a quick look at the [Linux Family Tree](https://en.wikipedia.org/wiki/List_of_Linux_distributions) 
 ---
 
 ## 2. What was ROS 1?
-The **Robot Operating System (ROS)** is "Middleware"—software that helps different hardware parts (sensors, motors) talk to each other.
+The **Robot Operating System (ROS)** is "Middleware" i.e. software that helps different hardware parts (sensors, motors) talk to each other.
 
 ### The "Master" Architecture
 ROS 1 relied on a central process called the **ROS Master**. 
-* **The Problem:** If the Master crashed, the entire robot failed. 
-* **The Network:** It was designed for a single robot on a stable, wired connection.
+- **The Problem:** If the Master crashed, the entire robot failed. 
+- **The Network:** It was designed for a single robot on a stable, wired connection.
 ---
 
 ## 3. What is ROS 2?
@@ -98,6 +98,7 @@ Here is a breakdown of how the versions align and what they provide:
 
 >  If you try to install **Jazzy** on Ubuntu **22.04**, it will fail because Jazzy requires specific versions of Python (3.12+) and C++ compilers that only come standard on Ubuntu **24.04**.
 
+
 ---
 
 ## 5. What is a Virtual Machine?
@@ -105,16 +106,15 @@ A **Virtual Machine (VM)** is a "software computer" that runs inside your physic
 
 ### How it works
 
-* **Host:** Your physical computer.
-* **Guest:** The Virtual Machine.
-* **Hypervisor:** The software that bridges them, carving out a slice of your RAM and CPU for the VM to use. We will be using VMware in this class.
+- **Host:** Your physical computer.
+- **Guest:** The Virtual Machine.
+- **Hypervisor:** The software that bridges them, carving out a slice of your RAM and CPU for the VM to use. We will be using **VMware** in this class.
 
 ### Why use one?
 
-* **Safety:** Run risky files in an isolated environment; if the VM crashes, your main computer is safe.
-* **Compatibility:** Run Windows apps on a Mac, or Linux on Windows.
-* **Snapshots:** Save the VM's state and "undo" any mistakes instantly.
-
+- **Safety:** Run risky files in an isolated environment; if the VM crashes, your main computer is safe.
+- **Compatibility:** Run Windows apps on a Mac, or Linux on Windows.
+- **Snapshots:** Save the VM's state and "undo" any mistakes instantly.
 
 ## 6. Git: Collaborative Version Control
 Git is the industry-standard version control system that allows developers to track changes in their code over time. 
@@ -128,14 +128,14 @@ Beyond just a safety net, Git enables multiple people to work on the same codeba
 ## 7. Mobile Robotics: The Hardware
 A mobile robot is a system that can move through and interact with its environment.
 We are using a [TurtleBot 4 Lite](https://en.wikipedia.org/wiki/TurtleBot) in this course. Here are some of its major hardware components:
-- iRobot Create 3 Base: Handles the movement (kinematics) and basic safety (cliff sensors).
-- OAK-D Lite: A spatial AI camera that provides 3D depth data (Point Clouds).
-- RPLidar A1: A 2D laser scanner that "sees" obstacles in a 360° circle.
-- Differential Drive System: Two powered wheels and one caster wheel. This allows the robot to rotate in place (zero-turn radius).
-- IMU (Inertial Measurement Unit): An onboard 6-axis sensor (accelerometer and gyroscope) that helps the robot track its orientation and tilt.
-- Internal Odometry: Optical encoders on the motors that count wheel rotations to estimate distance traveled.
-- Safety Bumpers & Cliff Sensors: Tactile sensors on the front and infrared sensors on the bottom to prevent the robot from hitting walls or falling down stairs.
-- Raspberry Pi 4 Model B: The TurtleBot 4 Lite is powered by a Raspberry Pi 4. This is where the Ubuntu 24.04 OS and your ROS 2 nodes actually run.
+- **iRobot Create 3 Base:** Handles the movement (kinematics) and basic safety (cliff sensors).
+- **OAK-D Lite:** A spatial AI camera that provides 3D depth data (Point Clouds).
+- **RPLidar A1:** A 2D laser scanner that "sees" obstacles in a 360° circle.
+- **Differential Drive System:** Two powered wheels and one caster wheel. This allows the robot to rotate in place (zero-turn radius).
+- **IMU (Inertial Measurement Unit):** An onboard 6-axis sensor (accelerometer and gyroscope) that helps the robot track its orientation and tilt.
+- **Internal Odometry:** Optical encoders on the motors that count wheel rotations to estimate distance traveled.
+- **Safety Bumpers & Cliff Sensors:** Tactile sensors on the front and infrared sensors on the bottom to prevent the robot from hitting walls or falling down stairs.
+- **Raspberry Pi 4 Model B:** The TurtleBot 4 Lite is powered by a Raspberry Pi 4. This is where the Ubuntu 24.04 OS and your ROS 2 nodes actually run.
 
 ---
 
