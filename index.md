@@ -83,12 +83,13 @@ $$Final\ Grade = Initial\ Grade + \frac{100 - Initial\ Grade}{2}$$
 ### 4. Resubmission Requirements
 A resubmission will not be graded unless it includes the following three components in the repository:
 
-- **A. Technical Reflection (`REFLECT.md`):** A brief document answering:
+- **A. Technical Reflection:** A brief document answering:
   1. **Root Cause:** What specifically caused the failure in the previous version? (e.g., sensor noise, PID windup, or logic race condition).
   2. **The Delta:** What specific logic, parameters, or hardware configurations were changed?
   3. **Validation:** How did you verify the new solution is robust?
 - **B. Git Diff / Pull Request:** For any submissions with code, a GitHub link to a diff highlighting the specific lines of code changed between the original and the new version.
 - **C. Video Demonstration:** For any hardware-based lab, an unedited 20–60 second video demonstrating the robot’s successful performance is mandatory.
+
 ---
 
 ### Case Study Examples
@@ -100,7 +101,7 @@ A resubmission will not be graded unless it includes the following three compone
 | **Late + Mastery** | 90% | 12h Late | 75% | **Yes** | **87.5%** |
 | **Hardware Crisis** | 80% | 40h Late | 50% | **Yes** | **75%** |
 
-**Note on Late + Mastery:** If you submit 1 day late and get a 90%, your grade is a 75%. If you then use a token to resubmit and get 100% on the fix, your final grade is .
+**Note on Late + Mastery:** If you submit 1 day late and get a 90%, your grade is a 75%. If you then use a token to resubmit and get 100% on the fix, your final grade is.
 
 ### 5. Logistics
 To use a token, fill out the **Regrade Request Form** on the Canvas. Include the link to your revised GitHub repository and the video proof.
