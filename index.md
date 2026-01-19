@@ -9,6 +9,11 @@ M/W 3:00 PM - 4:15 PM
 ## Location
 Poly - ISTB12, Room 212
 
+## Important Dates
+First Day of Classes: January 12, 2026
+Last Day of Classes: Apr 29, 2026
+Final Project Due: May 6, 2026
+
 # Course Schedule
 ```warning
 Subject to change based on class size, group formation, and lab availability
@@ -50,7 +55,7 @@ Subject to change based on class size, group formation, and lab availability
 | 16 | Apr 27 | M | **Hackathon** | Initial project setup |  |  |
 | 17 | Apr 29 | W | **Final Presentations** | Demo and Poster Presentations |  | Assignment 3: Bayes Filter |
 | 17 | May 4 | M |  |  |  |  |
-| 18 | May 6 | M |  |  |  | Report: Finalize Ideas |
+| 18 | May 6 | W |  |  |  | Report: Finalize Ideas |
 
 ---
 
