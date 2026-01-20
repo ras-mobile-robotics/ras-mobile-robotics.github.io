@@ -2,25 +2,16 @@
 layout: default
 title: "VS Code & SSH Setup"
 parent: Tutorials
-nav_order: 6
+sort: 6
 ---
 
 # VS Code & SSH Setup Guide
 
-This guide will walk you through setting up **Visual Studio Code (VS Code)** on your local machine, connecting to a **Remote Virtual Machine (VM)** via SSH, and installing the essential extensions for ROS 2 and Python development.
+This guide will walk you through setting connecting to a **Remote Virtual Machine (VM)** via SSH (to the robot), and installing the essential extensions for ROS 2 and Python development.
 
 ---
 
-## 1. Install VS Code
-
-1.  Download and install **Visual Studio Code** for your operating system:
-    * [Download VS Code](https://code.visualstudio.com/download)
-2.  Follow the installation wizard using the default settings.
-
----
-
-## 2. Install the Remote - SSH Extension
-
+## 1. Install the Remote - SSH Extension
 VS Code does not support SSH out of the box; you need the official extension from Microsoft.
 
 1.  Open VS Code.
@@ -30,19 +21,18 @@ VS Code does not support SSH out of the box; you need the official extension fro
 
 ---
 
-## 3. Connect to your VM
-
+## 2. Connect to a remote machine
 1.  In VS Code, press `F1` or `Ctrl+Shift+P` to open the **Command Palette**.
 2.  Type `Remote-SSH: Connect to Host...` and select it.
 3.  Select **Add New SSH Host**.
-4.  Enter: `ssh username@your_vm_ip_address`
+4.  Enter: `ssh username@remote_machine_ip`
 5.  Select the SSH configuration file to update (usually the first option in the list).
 6.  When prompted, click **Connect** in the bottom-right notification.
 7.  **Important:** Once connected, the bottom-left corner should display `SSH: [IP_ADDRESS]`.
 
 ---
 
-## 4. Recommended Extensions (Install while connected to SSH)
+## 3. Recommended Extensions
 
 > **Note:** When working over SSH, you must install extensions **on the Remote VM**. In the Extensions view, look for the button that says **"Install on SSH: [IP]"**.
 
@@ -63,7 +53,7 @@ VS Code does not support SSH out of the box; you need the official extension fro
 
 ---
 
-## 5. Recommended Settings (Format on Save)
+## 4. Format on Save
 
 To ensure your code always follows professional standards, enable **Format on Save**.
 
@@ -73,7 +63,7 @@ To ensure your code always follows professional standards, enable **Format on Sa
 
 ---
 
-## 6. Powering OFF
+## 5. Powering OFF
 To prevent data loss, always shut down the software before cutting hardware power.
 
 1.  **Shutdown the Pi/VM:** In the VS Code terminal, run:

@@ -61,12 +61,6 @@ sort: 1
   }
 </style>
 
-```danger
-## Under Construction
-This guide is currently being updated for the **Spring 2026** semester. Please note that some text and terminal commands may change before the final release.
-```
-
-
 # LAB 1: VM Setup and ROS Pub/Sub
 
 This guide covers the configuration of the the Ubuntu VM. Then by using the official ROS 2 Jazzy documentation, you learn how to navigate the primary resource for ROS 2.
@@ -83,15 +77,15 @@ Your grade will be based on a live demonstration and a technical interview cover
 - Live Modification: Demonstrate code proficiency by making small, real-time changes to your logic.
 
 ## PART 1: VM Setup
-The Host computer will run a Ubuntu 24.04 VM using VMWare. ROS 2 Jazzy FastDDS (along with a lot of useful tools) is installed in the Ubuntu VM.
+Install VMWare Workstation (Windows/Linux) or VMWare Fusion 25H2 (MacOS) from [here](https://knowledge.broadcom.com/external/article/368667/download-and-license-vmware-desktop-hype.html). The Host computer will run an Ubuntu 24.04 VM using VMWare. ROS 2 Jazzy FastDDS (along with a lot of useful tools) is installed in the Ubuntu VM.
+
+> Note: The download process is a bit annoying. You will need to create an account first (Click on Login -> Register). After logging in, click on "My Downloads", search for the right software, Check on "Terms and Conditions", and then finally download it. 
+
 
 ### 1. Importing the VM
 1.  Open VMware (Workstation, Player, or Fusion).
 2.  Select **File > Open** and choose the provided `.ova` file.
-3.  **CRITICAL:** When you first start the VM, VMware will ask: *"This virtual machine might have been moved or copied."*
-    * Select: "I COPIED IT"
-    > This generates a unique MAC address and Machine ID so your VM doesn't conflict with others on the network.
-    
+3.  If VMware asks if *"This virtual machine might have been moved or copied.", Select "_I copied it_"
 
 ### 2. Optimizing Hardware Settings
 Before clicking "Power On," select **Edit Virtual Machine Settings** and apply these optimizations:
@@ -104,35 +98,53 @@ Before clicking "Power On," select **Edit Virtual Machine Settings** and apply t
 | **Graphics Memory**| **1GB** | Prevents GUI flickering in simulations. |
 | **Network Adapter**| **Bridged (Automatic)** | VM needs its own IP for ROS setup. |
 
-> **NOTE:** If you need to lower these values slightly due to hardware limitations, the VM should still function. If your computer was purchased within the last 3-3 years, it will likely run the VM without issues.
+> **NOTE:** If you need to lower these values slightly due to hardware limitations, the VM should still function. If your computer was purchased within the last 4 years, it will likely run the VM without issues.
 
 ---
 
-### 3: First Boot
+### 3: Get your Unique Student ID
+1. Go to [Canvas](https://canvas.asu.edu/courses/249083/) and click on **Grades**.
+2. You should see a score for the Assignment **Lab Student ID**. The score is your **Lab Student ID**.
 
-> **NOTE:**  Make sure you change the display settings to match the resolution and scaling required for your monitor.
+For example, in the below screenshot of the Grades Page, the **Lab Student ID** is **40** (Ignore the "/0").
+![Example Student ID](../assets/images/example_student_id.png)
 
-Once you log in, run this script on your Desktop to configure your VM. It will automatically set your hostname to `ubuntuvm{STUDENT_ID}`.
+### 4: First Boot
 
-Open a terminal using the Tilix application on the Ubuntu global menu. 
-> Tilix is a tiling terminal emulator for Linux that allows you to organize multiple terminal sessions into a single window using a flexible grid layout.
-```bash
-./vm_setup/first_boot.sh
+```note
+In Ubuntu 24.04 VM, 
+  username: `eva` and
+  password: `wall-E`. 
+
+Password for keyring: `wall-e`. This is **ONLY** when the keyring password is requested in a GUI window. For example, when you start VS Code after a reboot.
 ```
 
-> The script sets a unique hostname for your VM, and then ask for you to reboot the VM.
+Note> Make sure you change the display settings to match the resolution and scaling required for your monitor.
+
+1. Open a terminal using the Tilix application on the Ubuntu global menu. 
+> Tilix is a tiling terminal emulator for Linux that allows you to organize multiple terminal sessions into a single window using a flexible grid layout.
+1. Run the commands below:
+```bash
+cd ~/vm_setup
+git pull
+./first_boot.sh
+```
+> Note: Enter your unique Lab Student ID when requested by the script.
+
+In the above bash commands, you are pulling the latest changes from the git repo [vm_setup](https://github.com/ras-mobile-robotics/vm_setup) hosted on GitHub (If you are unfamiliar with git, dont worry! We will post a quick guide for git soon.). 
+
+You then run the script **first_boot.sh**. It will automatically set your VM to a unique hostname (different from the ubuntu VMs run by other students) to `ubuntuvm{LAB_STUDENT_ID}`. It will subsequently ask you to reboot the VM for the changes to take place.
 
 ---
 
-### 4: Get IP
+### 5: Get IP
 
-After reboot, your VM should be connected to the same Wifi as your host computer.
+After reboot, your VM should be connected to the same WiFi as your host computer.
 Run the below command in a terminal in the VM to get the IP address of your VM:
 
 ```bash
 ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '127.0.0.1' | head -n 1
 ```
-> TIP: Create an bash **alias** for the command below, as it will be useful in later labs and assignments.
 
 ### 5. How to Shutdown?
 In VMware, choosing how to close your VM is the difference between a clean exit and a corrupted lab.
@@ -148,7 +160,7 @@ To shutdown safely, there are two ways to ensure your work is saved and the virt
 
 ##### 1. Using the Terminal
 - **GUI:** Top-right corner icon → **Power Off / Log Out** → **Power Off**.
-- **Terminal:** Open a and type: `sudo shutdown now`.
+- **Terminal:** Open a terminal and type: `sudo shutdown now`.
 
 ##### 2. Using the VMware Interface
 
@@ -158,7 +170,6 @@ To shutdown safely, there are two ways to ensure your work is saved and the virt
   <label for="tab-win-top">Windows</label>
   <div class="tab-content" markdown="1">
 
-### Windows Instructions
 1. Click the **Player** menu (top left).
 2. Go to **Power**.
 3. Select **Shut Down Guest**.
@@ -169,7 +180,6 @@ To shutdown safely, there are two ways to ensure your work is saved and the virt
   <label for="tab-mac-top">Mac</label>
   <div class="tab-content" markdown="1">
 
-### Mac Instructions
 1. Click the **Virtual Machine** menu.
 2. Select **Shut Down**.
 
@@ -185,7 +195,7 @@ Take some time to learn how to use VMWare and the Ubuntu OS.
 
 ## PART 2: ROS 2 Publisher and Subscriber
 
-In this part, you will learn about ros worksapces, ros packages and `colcon`. You will then follow the industry-standard ROS2 tutorial to create a basic "Talker" and "Listener".
+In this part, you will learn about ros workspaces, ros packages and `colcon`. You will then follow the industry-standard ROS2 tutorial to create a basic "Talker" and "Listener".
 
 ### ROS Workspace
 A ROS workspace is a directory with a particular structure. Commonly there is a ``src`` subdirectory. Inside that subdirectory is where the source code of ROS packages will be located. Typically the directory starts otherwise empty.
@@ -250,22 +260,14 @@ source install/setup.bash
 #### Faster Code Iterations without build
 `colcon build`: Copies your Python scripts from the src folder to the install folder. If you change your code, you must rebuild for the changes to take effect.
 
-`colcon build --symlink-install`: Creates "symbolic links" (shortcuts) from the install folder back to your src folder. If you change your code, the changes take effect immediately without rebuilding. If you create a brand new .py file that needs to be recognized as part of the package or make cahnges to setup.py or package.xml, you need to run `colcon build` first.
+`colcon build --symlink-install`: Creates "symbolic links" (shortcuts) from the install folder back to your src folder. If you change your code, the changes take effect immediately without rebuilding. If you create a brand new .py file that needs to be recognized as part of the package or make changes to setup.py or package.xml, you need to run `colcon build` first.
 
-#### Tips
-
-* If you do not want to build a specific package, then place an empty file named ``COLCON_IGNORE`` in the directory and it will not be indexed.
-
-* If you want to run a single particular test from a package:
-
-```bash
-colcon test --packages-select YOUR_PKG_NAME
-```
+`colcon build --packages-select YOUR_PKG_NAME`: Build only the selected package "YOUR_PKG_NAME" to speed up the build process.
 
 ---
 
 ### ROS 2 package
-A package is an organizational unit for your ROS 2 code.If you want to be able to install your code or share it with others, then you'll need it organized in a package.
+A package is an organizational unit for your ROS 2 code. If you want to be able to install your code or share it with others, then you'll need it organized in a package.
 With packages, you can release your ROS 2 work and allow others to build and use it easily.
 
 Package creation in ROS 2 uses `ament` as its build system and `colcon` as its build tool. You can create a package using either CMake or Python, which are officially supported, though other build types do exist.
@@ -341,7 +343,7 @@ For the rest of the tutorial, we will focus only on **Python** nodes.
 #### Packages in a workspace
 
 A single workspace can contain as many packages as you want, each in their own folder.
-You can also have packages of different build types in one workspace (CMake, Python, etc.). BUt you cannot have nested packages.
+You can also have packages of different build types in one workspace (CMake, Python, etc.). But you cannot have nested packages.
 
 Best practice is to have a ``src`` folder within your workspace, and to create your packages in there. This keeps the top level of the workspace "clean".
 
@@ -438,7 +440,7 @@ source install/local_setup.bash
 Now that your workspace has been added to your path, you will be able to use your new package's executables.
 
 ```note
-Sourcing acts like a "refresh" for your terminal, telling it where to find the ROS 2 tools and your custom code. By default, a new terminal window doesn't know your workspace exists; running `source install/local_setup.bash` updates your environment variables (specifically your PATH) so the system can locate and execute your specific packages. You must do this in every new terminal tab you open, or the system will report that your commands or packages cannot be found. You could also add it to your .bashrc file so that it is done everytime a new terminal is opened.
+Sourcing acts like a "refresh" for your terminal, telling it where to find the ROS 2 tools and your custom code. By default, a new terminal window doesn't know your workspace exists; running `source install/local_setup.bash` updates your environment variables (specifically your PATH) so the system can locate and execute your specific packages. You must do this in every new terminal you open, or the system will report that your commands or packages cannot be found. You could also add it to your .bashrc file so that it is done every time a new terminal is opened.
 ```
 
 
@@ -459,7 +461,7 @@ Hi from my_package.
 
 Inside ``ros2_ws/src/my_package``, you will see the files and folders that ``ros2 pkg create`` automatically generated:
 ```bash
-my_package  package.xml  resource  setup.cfg  setup.py  test
+LICENSE my_package  package.xml  resource  setup.cfg  setup.py  test
 ```
 
 ``my_node.py`` is inside the ``my_package`` directory. This is where all your custom Python nodes will go in the future.
@@ -478,8 +480,8 @@ From ``ros2_ws/src/my_package``, open ``package.xml`` using your preferred text 
 <name>my_package</name>
 <version>0.0.0</version>
 <description>TODO: Package description</description>
-<maintainer email="user@todo.todo">user</maintainer>
-<license>TODO: License declaration</license>
+<maintainer email="eva@todo.todo">eva</maintainer>
+<license>Apache-2.0</license>
 
 <test_depend>ament_copyright</test_depend>
 <test_depend>ament_flake8</test_depend>
@@ -496,13 +498,6 @@ Then, edit the ``description`` line to summarize the package:
 
 ```xml
   <description>Beginner client libraries tutorials practice package</description>
-```
-
-Then, you may update the ``license`` line. You can read more about open source licenses [here](https://opensource.org/licenses/alphabetical). Since this package is only for practice, it's safe to use any license.
-We'll use ``Apache-2.0``:
-
-```xml
-  <license>Apache-2.0</license>
 ```
 
 Don't forget to save once you're done editing.
@@ -530,10 +525,10 @@ data_files=[
   ],
 install_requires=['setuptools'],
 zip_safe=True,
-maintainer='TODO',
-maintainer_email='TODO',
+maintainer='eva',
+maintainer_email='eva@todo.todo',
 description='TODO: Package description',
-license='TODO: License declaration',
+license='Apache-2.0',
 tests_require=['pytest'],
 entry_points={
     'console_scripts': [
@@ -553,7 +548,14 @@ You've created your first ROS2 package to organize your code and make it easy to
 
 ---
 
-### Writing a simple publisher and subscriber
+### Write a simple publisher and subscriber
+
+```tip
+Use VS Code as your text editor. Add [extensions](../tutorials/vscode.html#ros-2--robotics) to make your life easier.
+Open the entire package folder so you can easily open and edit different files, or search across the entire package.
+```
+
+
 Use the ROS2 official tutorial [Writing a simple publisher and subscriber (Python)](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html) to learn to create your first subscriber and publisher node.
 
 Run both nodes in separate terminals. You should see "Hello World" messages streaming across.
@@ -562,5 +564,7 @@ Run both nodes in separate terminals. You should see "Hello World" messages stre
  
 ---
 
-Ref:
-- The source code can be found in the [colcon GitHub organization](https://github.com/colcon)
+# References
+- ROS Client Libraries: [https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries.html](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries.html)
+- bash Basic Commands: [https://www.w3schools.com/bash/bash_commands.php](https://www.w3schools.com/bash/bash_commands.php)
+- ROS Jazzy Installation: [https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)
