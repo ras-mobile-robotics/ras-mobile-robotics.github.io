@@ -158,6 +158,10 @@ Password for keyring: `wall-e`. This is **ONLY** when the keyring password is re
 
 1. Open a terminal using the Tilix application on the Ubuntu global menu. 
 > Tilix is a tiling terminal emulator for Linux that allows you to organize multiple terminal sessions into a single window using a flexible grid layout.
+
+```note
+If your VM cannot connect to the internet, the `git pull` command will fail. That is ok!
+```
 1. Run the commands below:
 ```bash
 cd ~/vm_setup
