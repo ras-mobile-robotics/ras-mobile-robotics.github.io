@@ -19,43 +19,48 @@ Final Project Due: May 6, 2026
 Subject to change based on class size, group formation, and lab availability
 ```
 
-| Wk | Date | Day | Topic | Description | Labs and Assignments START | Labs and Assignments END |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | Jan 12 | M | **Introduction to Robotics** | Syllabus review & course structure | Reading for Quiz 1 |  |
-| 1 | Jan 14 | W | **ROS Overview** | ROS publishers/subscribers, services, params | Quiz 0 for Lab 0 | Reading for Quiz 1 |
-| 1 | Jan 16 | F |  |  | Lab 1: Setup (VM and ROS Basics) |  |
-| 2 | Jan 19 | M | **NO CLASS** | Holiday: Martin Luther King Jr. Day |  |  |
-| 2 | Jan 21 | W | **A Primer on Coordinate Frames** | Transformation matrices, quaternions, ROS TF |  |  |
-| 3 | Jan 26 | M | **A Primer on Kinematics and Dynamics** | Overview of Kinematics and Dynamics | Lab 2: Robot Setup | Lab 1: Setup (VM and ROS Basics) |
-| 3 | Jan 28 | W | **A Primer on Contro**l | Overview of Control Systems, PID Control |  |  |
-| 4 | Feb 2 | M | **A Primer on Perception** | Overview of robot sensor types |  |  |
-| 4 | Feb 4 | W | **Robot Sensors** | Types of sensors, Levels of perception in robotics | Lab 3: Simulation | Lab 2: Robot Setup |
-| 5 | Feb 9 | M | **Range Sensors** | Line fitting (RANSAC, Hough Transform) | Report: Form Groups and Initial Ideas |  |
-| 5 | Feb 11 | W | **Image Processing** | Color spaces, filters, edge detection | Lab 4: Sensor-Motor Loop | Lab 3: Simulation |
-| 6 | Feb 16 | M | **Feature Matching** | SIFT, ORB |  |  |
-| 6 | Feb 18 | W | **3D Point Clouds and Filtering** | Voxel grid, statistical outlier, pass-through filters |  | Report: Form Groups and Initial Ideas |
-| 7 | Feb 23 | M | **Segmentation and Registration** | Euclidean Cluster Extraction & ICP | Assignment 1: Perception | Lab 4: Sensor-Motor Loop |
-| 7 | Feb 25 | W | **Local Planning I** | Motion Planning, BUG Algorithms |  |  |
-| 8 | Mar 2 | M | **Local Planning II** | Dynamic Window Approach (DWA), Potential Fields |  |  |
-| 8 | Mar 4 | W | **Global Planning I** | Map Representations & Occupancy Grids | Report: Refine Ideas |  |
-| 9 | Mar 9 | M | **NO CLASS** | Spring Break |  |  |
-| 9 | Mar 11 | W | **NO CLASS** | Spring Break |  |  |
-| 10 | Mar 16 | M | **Global Planning II** | Greedy, A*, Dijkstra’s Algorithms |  |  |
-| 10 | Mar 18 | W | **Sampling-based Planners** | RRT and PRM | Assignment 2: Motion Planning | Assignment 1: Perception |
-| 11 | Mar 23 | M | **Bayes Filter** | Uncertainty and Gaussian noise models |  |  |
-| 12 | Mar 25 | W | **Bayes Filter (Cont.)** | Covariance propagation |  |  |
-| 12 | Mar 30 | M | **Sensor Model** | Beam model and likelihood field model |  |  |
-| 13 | Apr 1 | W | **Motion Model** | Odometry and velocity models |  | Report: Refine Ideas |
-| 13 | Apr 6 | M | **Kalman Filter** | Linear Kalman filter | Assignment 3: Bayes Filter | Assignment 2: Motion Planning |
-| 14 | Apr 8 | W | **Extended Kalman Filter** | EKF localization & Nonlinear state estimation |  |  |
-| 14 | Apr 13 | M | **Particle Filter** | Non-parametric distributions & importance sampling |  |  |
-| 15 | Apr 15 | W | **Brief Introduction to SLAM** | Introduction to SLAM | Report: Finalize Ideas |  |
-| 15 | Apr 20 | M | **Ethics in AI** | Theoretical concepts and case studies |  |  |
-| 16 | Apr 22 | W | **Ethics in AI** | Responsibilities and AI ethics |  |  |
-| 16 | Apr 27 | M | **Hackathon** | Initial project setup |  |  |
-| 17 | Apr 29 | W | **Final Presentations** | Demo and Poster Presentations |  | Assignment 3: Bayes Filter |
-| 17 | May 4 | M |  |  |  |  |
-| 18 | May 6 | W |  |  |  | Report: Finalize Ideas |
+| Wk  | Date  | Day  | Topic  | Description  | Labs and Assignments
+START  | Labs and Assignments
+END  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1  | Jan 12  | M  | Introduction to Robotics  | Syllabus review & course structure  | Reading for Quiz 1 |   |  |  |  |  |
+| 1  | Jan 14  | W  | ROS Overview  | ROS publishers/subscribers, services, params  | Quiz 0 for Lab 0  | Reading for Quiz 1 |  |  |  |  |
+| 1   | Jan 16  | F  |   |   | Lab 1: Setup (VM and ROS Basics)  |   |  |  |  |  |
+| 2  | Jan 19  | M  | NO CLASS  | Holiday: Martin Luther King Jr. Day  |   |   |  |  |  |  |
+| 2  | Jan 21  | W  | A Primer on Coordinate Frames  | Coordinate Frames and Transformation matrices  |   |   |  |  |  |  |
+| 3  | Jan 26  | M  | Coordinate Frames in ROS | Quaternions and ROS TF |  | Lab 1: Setup (VM and ROS Basics)  |  |  |  |  |
+| 3  | Jan 27 | T |   |   | Lab 2: Simulation |  |  |  |  |  |
+| 3  | Jan 28  | W  | A Primer on Kinematics and Dynamics | Overview of Kinematics, Dynamics and Control Systems |   |   |  |  |  |  |
+| 4  | Feb 2  | M  | A Primer on Perception  | Overview of Robot Sensors and Levels of Perception |   |   |  |  |  |  |
+| 4  | Feb 3 | T |   |   |  | Lab 2: Simulation |  |  |  |  |
+| 4  | Feb 4  | W  | Range Sensors  | Line fitting (RANSAC, Hough Transform)  | Lab 3: Robot Setup  |  |  |  |  |  |
+| 5  | Feb 9  | M  | Robot Setup | Robot Setup | Report: Form Groups and Initial Ideas  |   |  |  |  |  |
+| 5  | Feb 11  | W  | Image Processing | Color spaces, filters, edge detection |  |  |  |  |  |  |
+| 6  | Feb 16  | M  | Feature Matching | SIFT, ORB  | Lab 4: Sensor-Motor Loop | Lab 3: Robot Setup  |  |  |  |  |
+| 6  | Feb 18  | W  | 3D Point Clouds and Filtering  | Voxel grid, statistical outlier, pass-through filters  |  |  |  |  |  |  |
+| 7  | Feb 23  | M  | Segmentation and Registration  | Euclidean Cluster Extraction & ICP  | Assignment 1: Perception  | Lab 4: Sensor-Motor Loop |  |  |  |  |
+| 7  | Feb 25  | W  | Local Planning I | Motion Planning, BUG Algorithms |   | Report: Form Groups and Initial Ideas  |  |  |  |  |
+| 8  | Mar 2  | M  | Local Planning II | Dynamic Window Approach (DWA), Potential Fields  |   |   |  |  |  |  |
+| 8  | Mar 4  | W  | Global Planning I  | Map Representations & Occupancy Grids  | Report: Refine Ideas  |   |  |  |  |  |
+| 9  | Mar 9  | M  | NO CLASS  | Spring Break  |   |   |  |  |  |  |
+| 9  | Mar 11 | W  | NO CLASS  | Spring Break  |   |   |  |  |  |  |
+| 10 | Mar 16 | M  | Global Planning II  | Greedy, A*, Dijkstra’s Algorithms |   |   |  |  |  |  |
+| 10 | Mar 18  | W  | Sampling-based Planners  | RRT and PRM  | Assignment 2: Motion Planning  | Assignment 1: Perception  |  |  |  |  |
+| 11  | Mar 23  | M  | Bayes Filter  | Uncertainty and Gaussian noise models  |   |   |  |  |  |  |
+| 11  | Mar 25  | W  | Bayes Filter (Cont.)  | Covariance propagation  |   |   |  |  |  |  |
+| 12  | Mar 30  | M  | Sensor Model  | Beam model and likelihood field model  |   |   |  |  |  |  |
+| 12  | Apr 1  | W  | Motion Model  | Odometry and velocity models  |   | Report: Refine Ideas  |  |  |  |  |
+| 13  | Apr 6  | M  | Kalman Filter  | Linear Kalman filter | Assignment 3: Bayes Filter  | Assignment 2: Motion Planning  |  |  |  |  |
+| 13  | Apr 8  | W  | Extended Kalman Filter  | EKF localization & Nonlinear state estimation  |   |   |  |  |  |  |
+| 14  | Apr 13  | M  | Particle Filter  | Non-parametric distributions & importance sampling  |   |   |  |  |  |  |
+| 14  | Apr 15  | W  | Brief Introduction to SLAM  | Introduction to SLAM  | Report: Finalize Ideas  |   |  |  |  |  |
+| 15  | Apr 20  | M  | Ethics in AI  | Theoretical concepts and case studies  |   |   |  |  |  |  |
+| 15  | Apr 22  | W  | Ethics in AI  | Responsibilities and AI ethics |  |   |  |  |  |  |
+| 16  | Apr 27  | M  | Hackathon  | Initial project setup  |   |   |  |  |  |  |
+| 16  | Apr 29  | W  | Final Presentations  | Demo and Poster Presentations  |   | Assignment 3: Bayes Filter  |  |  |  |  |
+| 17  | May 4  | M  |  |  |   |   |  |  |  |  |
+| 17  | May 6  | W  |  |  |   | Report: Finalize Ideas  |  |  |  |  |
+
 
 ---
 
