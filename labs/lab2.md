@@ -94,7 +94,7 @@ ros2 run tf2_ros tf2_echo base_link <YOUR_CAMERA_FRAME_NAME>
 
 ## Deliverables
 
-A short screen recording (~10 secs) each for thew following:
+In Canvas, submit a short screen recording (~10 secs) for each of the following:
 1. The turtles moving from [Task 1](../labs/lab2#task-1-complete-the-ros-tf2-tutorial).
 2. Turtlebot moving around in Gazebo from [Task 3](../labs/lab2#task-3-robot-teleoperation).
 3. tf tree and the terminal window printing the offest from [Task 5](../labs/lab2#task-5-measuring-the-offset).
