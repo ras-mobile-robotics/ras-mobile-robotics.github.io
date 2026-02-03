@@ -118,6 +118,31 @@ sudo nano /opt/ros/jazzy/share/irobot_create_control/config/control.yaml
 
 ---
 
+
+## Software Rendering for Gazebo
+If you have already attempted the steps in [3D Hardware Acceleration](#Enable-3D-Hardware-Acceleration) and Gazebo still flickers or crashes, the best solution is to use **Software Rendering**.
+
+By forcing the system to use software-based OpenGL, you bypass the buggy virtualized 3D acceleration drivers of the VM. But now all the rendering is handled by the CPU, so the simulation performance will get affected.
+
+### Option 1: Basic Software Rendering
+
+Run this in your terminal before launching the TurtleBot 4 simulation:
+
+```bash
+export LIBGL_ALWAYS_SOFTWARE=1
+```
+
+### Option 2: Software Rendering with Version Override
+
+If the simulation still fails to load or the sensors (Lidar/Camera) cause a crash, try overriding the OpenGL version:
+
+```bash
+export MESA_GL_VERSION_OVERRIDE=3.3
+export LIBGL_ALWAYS_SOFTWARE=1
+```
+
+---
+
 ## Expand VM Hard Disk
 
 ```tip
