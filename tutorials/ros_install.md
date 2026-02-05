@@ -57,22 +57,23 @@ sudo apt install git curl -y
 The script provided by RAS automates the ROS2 Jazzy installation, configures environment variables, and installs necessary build tools (like Colcon and Rosdep).
 
 1. **Download the script:**
-```bash
-curl -O https://raw.githubusercontent.com/ras-mobile-robotics/vm_setup/main/deploy/setup_vanilla_ubuntu.sh
-```
+
+    ```bash
+    curl -O https://raw.githubusercontent.com/ras-mobile-robotics/vm_setup/main/deploy/setup_vanilla_ubuntu.sh
+    ```
 
 
 2. **Make it executable:**
-```bash
-chmod +x setup_vanilla_ubuntu.sh
 
-```
+    ```bash
+    chmod +x setup_vanilla_ubuntu.sh
+    ```
 
 3. **Run the script:**
-```bash
-./setup_vanilla_ubuntu.sh
 
-```
+    ```bash
+    ./setup_vanilla_ubuntu.sh
+    ```
 
 
 *Note: The script will prompt for your `sudo` password to install packages.*
@@ -84,26 +85,26 @@ chmod +x setup_vanilla_ubuntu.sh
 After the script finishes, **restart your terminal** or run `source ~/.bashrc`. Then, verify ROS2 is working:
 
 1. **Check ROS2 version:**
-```bash
-echo $ROS_DISTRO
 
-```
+    ```bash
+    echo $ROS_DISTRO
+    ```
 
 *Expected Output:* `jazzy`
 
 2. **Run a Demo Talker:**
-```bash
-ros2 run demo_nodes_cpp talker
 
-```
+    ```bash
+    ros2 run demo_nodes_cpp talker
+    ```
 
 
 3. **Run a Demo Listener (in a new terminal):**
-```bash
-ros2 run demo_nodes_py listener
+    
+    ```bash
+    ros2 run demo_nodes_py listener
 
-```
-
+    ```
 
 If the listener receives messages, your installation is successful!
 
