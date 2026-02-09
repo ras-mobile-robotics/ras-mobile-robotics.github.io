@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Robot Setup"
+title: "Robot Setup, Basic Motion and Visualizatoin"
 sort: 3
 ---
 
@@ -9,266 +9,226 @@ sort: 3
 This guide is currently being updated for the <strong>Fall 2025</strong> semester. Please note that some screenshots or terminal commands may change before the final release.
 ```
 
-This guide covers the configuration of the your **Host Computer** and a **TurtleBot 4** using the Discovery Server protocol. This ensures stable communication in a shared classroom network environment.
+# Lab 3: Robot Setup, Basic Motion, and Visualization
 
-## Network Connectivity
-
-Follow these steps to setup a VPN to bypass the university network restrictions and connect your VM to your Robot in a secure way.
-
-
-### Step 1: Singup for Tailscale to create Your VPN Network
-
-1. Go to [tailscale.com](https://tailscale.com) and sign up for a free "Personal" account.
-
-### Step 2: Connect the VM to Your Network
-
-1. Open a terminal window.
-2. Run the following command to begin the link process:
-```bash
-curl -fsSL https://tailscale.com/install.sh | sh
-```
-3. After installing Tailscale, run the below command to run it:
-```bash
-sudo tailscale up --accept-dns=true
-```
-4. The terminal will display a **URL**. Copy and paste this link into your host web browser.
-5. If not logged in, log in using the account created in Step 1. The VM is now part of your private virtual network.
-
-### Step 3: Connect the Robot to Your Network
-
-1. Access the Raspberry Pi terminal (via SSH over a cable, or a monitor and keyboard).
-2. Run the following command to begin the link process:
-```bash
-curl -fsSL https://tailscale.com/install.sh | sh
-```
-3. After installing Tailscale, run the below command to run it:
-```bash
-sudo tailscale up --accept-dns=true
-```
-3. The terminal will display a **URL**. Copy and paste this link into your host web browser.
-5. If not logged in, log in using the account created in Step 1. The Turtlebot is now part of your private virtual network.
-
-### Step 4: Get Machine Names from the Tailscale Admin Console
-1. **Open the Admin Console:** Log in at [login.tailscale.com/admin/machines](https://login.tailscale.com/admin/machines).
-2. **Locate the "Machines" List:** You will see a table of all devices currently connected to your network.
-3. Under **Machine Name** you should see a row for the turtlebot (ex: turtlebot8) and a row for the vm (ubuntuvm12). Copy the machine names for each of them.
-4. Click on the **DNS** link or go to [login.tailscale.com/admin/dns](https://login.tailscale.com/admin/dns).
-5. Copy the **Tailnet DNS Name** (ex: tailcdXXXXX.ts.net).
-
-### Step 5: Test SSH
-1. To ssh into the robot from the VM:
-```bash
-ssh <robot_machine_name>@<tailnet_dns_name>
-```
-2. To ssh into the VM from the robot:
-```bash
-ssh <vm_machine_name>@<tailnet_dns_name>
-```
-
-If both of them work, you have successfully setup a VPN where your Ubuntu VM can communicate with the Turtlebot.
-
-### Step 6: Share your Turtlebot
-```bash
-Skip this step if you are not sharing your turtlebot.
-```
-1. Open the [Tailscale Admin Console](https://login.tailscale.com/admin/machines) on your host computer.
-2. Locate your Turtlebot in the list, click the **"..."** (three dots) menu, and select **Share**.
-3. Copy the invitation link and send it to your teammate(s).
-4. Teammates must click the link and log in with **their own Tailscale accounts**. Once accepted, the Pi will appear in their Tailscale device list as if it were on their own network.
----
-
-#### **On All Team Laptops:**
-
-To tell ROS 2 where the robot is, add these lines to the end of your `~/.bashrc` file:
-
-```bash
-export ROS_DISCOVERY_SERVER=<PI_TAILSCALE_IP>:11811
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-export ROS_DOMAIN_ID=<YOUR_ASSIGNED_TEAM_NUMBER> 
-
-```
-
-*Note: The **Domain ID** ensures your team's traffic does not interfere with other robots in the lab.*
+In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physical **TurtleBot 4** via a **Discovery Server**, visualize real-time sensor data in **RViz2**, and write a **Python node** to navigate the robot in a specific geometric path.
 
 ---
 
-### ⚠️ Troubleshooting
+## 1. Collaboration & Submission Policy
 
-* **Verification:** Try to `ping` the Pi's Tailscale IP from your laptop. If it responds, the "tunnel" is working.
-* **Connection Quality:** Run `tailscale status` in your terminal.
-* **Direct:** Optimal performance.
-* **Relay:** You may experience lag. This happens when the university firewall is particularly strict. Try reconnecting to the Wi-Fi or using a mobile hotspot if the lag is unworkable.
+Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from Task 3 (Rectangle, Triangle, or Pentagon).
 
+## 3. Power Management
 
-* **No Data in ROS:** Ensure the `ROS_DISCOVERY_SERVER` IP address on your laptop exactly matches the IP found in Step 2.
+The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Base**. Correct shutdown is essential to prevent SD card corruption.
+
+### Startup
+1. Place the robot on the charger dock.
+2. Wait ~3 minutes for the robot to initialize:
+   1. First, you will hear a chime <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio> that indicates the Create Base is booted up
+   2. Soon after, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
+
+### Graceful Shutdown
+> This procedure ensures a graceful shutdown of both the Raspberry Pi and the Create 3 base, preventing SD card corruption and hardware-level data loss.
+
+1. Move the robot off the charger.
+2. In your SSH session: `sudo shutdown -h now`.
+3. Wait 30 seconds, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
 
 ---
 
-**Would you like me to provide a script for the Pi that automatically starts this Discovery Server whenever the robot is turned on?**
+## 4. Environment Setup
 
+### 4.1 ROS2 Environment Setup
+To ensure you only communicate with your assigned robot, we use specific **Domain IDs** and a **FastDDS Discovery Server**.
+
+Run the commands below to pull the latest changes and run the setup script:
+
+```bash
+cd ~/vm_setup
+git pull
+./setup_robot_env.sh
+```
+---
+
+### 4.2 Setup Bridged Network Mode
+
+Your VM must be in **Bridged Network** mode to act as a physical device on the local network.
+
+### Verify Connection
+
+Run this command in your VM terminal:
+
+```bash
+ip route get 8.8.8.8
+```
+
+The output should show a local IP address (e.g., `192.168.50.x`). If it shows `172.x.x.x` or `10.x.x.x`, you are in NAT mode and must switch to Bridged mode in your VM settings (VMware/VirtualBox) and restart.
 
 ---
 
+## 5. Task 1: Remote Access and Hardware Check
 
-#### Startup
-1. Move the robot to the charger dock.
-2. The light on the charger would light up, foloowed by the ring light on the robot.
-3. Wait for about 3 mins until you hear a chime, and see a fast pink light rotating in the ring.
-> This chime signifies that both the RPi and the Create 3 robot controller are powered on and communicating with each other. It also confirms that the ROS 2 environment is fully initialized and operational.
+### 1. Ping the Robot
 
+```bash
+ping turtlebot
+```
 
-#### Set Turtlebot to WiFi AP mode
-1. After the robot is succesffully booted.
-2. Make sure the light is Solid White.
-3. Press "Button 1" 5 times. 
-   > You will hear a long beep.
-4. The robot will now restart and go into Wifi AP mode. Wait for the startup process (!3 mins).
-5. Connect to the Wifi SSID "Tutlebot_AP_X" (X is your ID)
-6. ssh ubuntu@10.42.0.1
-7. Run turtlebot4-setup
-@todo
+> `turtlebot` is a hostname that translates to the IP address of your specific robot, configured by the `setup_robot_env.sh` script. It makes your life easier by not having to remember the IP Address of your robot.
 
+### 2. SSH into the Robot
 
-## Robot Configuration 
-
-You must configure your specific TurtleBot 4 hardware via the physical screen.
-
-### 1: Setup SSH Tutorial: Remote Access Made Simple
 SSH (Secure Shell) is the industry-standard method for connecting to a remote computer (like your TurtleBot 4 or a VM) over a network. It encrypts all traffic to prevent eavesdropping.
 
----
-
-> **Credentials**
-> * **User:** `eva`
-> * **Password:** `wall-E`
-
-#### Basic Connection
-From your terminal (Linux, macOS, or Windows PowerShell), use the following syntax:
+It creates an encrypted tunnel to the robot. Once you authenticate, your local terminal "hands over" its interface to the remote machine. You are no longer typing on your laptop; your command prompt effectively "teleports" to the robot, and every command executes on the robot's processor.
 
 ```bash
-ssh ubuntu@<ROBOT_IP>
+ssh ubuntu@robot
 ```
+> **Password:** `turtlebot`
 
-> **First Time Connection?** > You will see a warning: "The authenticity of host... can't be established." 
-> Type **yes** and press Enter. This adds the remote machine to your `~/.ssh/known_hosts` file.
+You will see a warning: "The authenticity of host... can't be established." when you connect to a remote machine for the first time. Type **yes** and press Enter.
 
----
+### 3. Check Nodes
 
-#### Passwordless Login (SSH Keys)
-Typing a password every time is slow. SSH Keys allow you to log in securely without a password using a "lock and key" system.
+Once logged in via SSH, verify the sensors are broadcasting:
 
-##### Step 1: Generate your Keys
-On **your laptop**, run:
 ```bash
-ssh-keygen -t ed25519
-```
-*Press Enter through all prompts to use the defaults.*
-
-##### Step 2: Copy the Key to the Remote Machine
-```bash
-ssh-copy-id eva@<ROBOT_IP>
+ros2 node list
 ```
 
-Once this is done, you can log in simply by typing `ssh eva@<ROBOT_IP>`.
+You should see nodes like `/motion_control`, `/oakd`, and `/rplidar_node`.
+
+> If your VM env is setup correctly, you can also run the same command on your VM.
 
 ---
 
-#### Common SSH Tasks
-| Action | Command Syntax |
-| :--- | :--- |
-| **Run a command & exit** | `ssh user@ip "ls -la"` |
-| **Copy file TO remote** | `scp local_file.txt user@ip:/home/user/` |
-| **Copy file FROM remote** | `scp user@ip:/path/to/file.txt ./` |
-| **Edit remote file** | `ssh user@ip "nano config.yaml"` |
+## 6. Task 2: Sensor Visualization (RViz2)
+RViz2 (ROS Visualization) is a 3D visualizer that allows you to see what the (real or simulated) robot "sees." It takes abstract data, like sensor readings, camera feeds, and coordinate frames, and renders them into a 3D environment that humans can understand.
+
+Read this [RViz2 tutorial](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html) before proceeding further. 
+> You do not need to install RViz2; it is pre-installed in your VM. 
+
+Launch **RViz2** on your VM (locally, **not** via SSH) to visualize the robot's "eyes."
+1. **Run RViz:** Type `rviz2` in your VM terminal.
+2. **Global Options:** Set **Fixed Frame** to `rplidar_link`.
+> *Note:* The `scan` messages use this frame ID. If you use `map` without SLAM running, the data will not appear.
+
+1. **Add Displays:**
+* **LaserScan:** Topic `/scan` (Set Reliability to **Best Effort**).
+* **TF:** To see the robot's transform tree.
+* **Image:** Topic `/color/preview/image` to see the OAK-D camera feed.
 
 ---
 
+## 7. Task 4: Manual Control and Message Inspection
 
-### 2: Turtlebot ROS2 Setup: Set Namespace and Discovery Server
+Before writing your script, you should manually drive the robot to observe how the `/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
 
-Run the built-in ROS2 setup utility for turtlebot4:
+### 1. Run Teleop (VM Terminal)
 
-```bash
-turtlebot4-setup
-
-```
-Navigate through the robot menu and follow the interactive prompts carefully:
-
-1. **ROS Setup** -> **Bash Setup**
-* Set `ROBOT_NAMESPACE` to: `robot_X` (Replace `X` with your assigned ID).
-
-2. **ROS Setup** -> **Discovery Server**
-* **Onboard Server - Server ID**: `X` (Must match your namespace ID).
-* Select **Save**.
-
-3. Return to the **Main Menu**.
-4. Select **Apply Settings**.
-* Confirm **YES**.
-* **Wait:** The process takes 1–3 minutes to reconfigure the network layers.
-
-5. **Exit** the utility.
-
-Apply the changes to your current session and restart the ros2 daemon processes:
+Open a new terminal on your VM and run the keyboard teleop node:
 
 ```bash
-turtlebot4-source
-turtlebot4-daemon-restart
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
-> [!IMPORTANT]
-> **Wait for the Chime:** Once the Create® 3 base config is loaded, the white spinning LED will stop. Wait until the LED ring settles on a **Solid White** state before proceeding.
+### 2. Echo the Velocity Topic (Second VM Terminal)
 
-
-### 3: VM ROS2 Setup: Set Namespace and Discovery Server
-These steps allow your personal computer to "see" the robot on the network, when the robot is running.
-
-#### Step 1: Run Discovery Script
-Run the command below to get the VM's IP address:
-```bash
-ip -4 addr show ens33 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
-```
-
-Run the configuration script provided in your setup folder:
+Open another terminal and "eavesdrop" on the commands being sent to the robot:
 
 ```bash
-. ~/vm_setup/configure_discovery.sh
+ros2 topic echo /cmd_vel
 ```
 
-Follow the interactive prompts carefully:
+The teleop_twist_keyboard node is sending the appropriate commands to the topic /robot_<RID>/cmd_vel based on the key you pressed.
 
-* **ROS_DOMAIN_ID [0]:** `0`
-* **Discovery Server ID [0]:** `X` (Matches your robot ID)
-* **Discovery Server IP:** `Y` (The IP of your TurtleBot)
-* **Discovery Server Port [11811]:** Press **Enter** (Default)
-* **Next Action:** Enter `d` for **Done**.
+### 3. Observe the Patterns
 
-#### Step 2: Finalize EnvironmentSmart Series 4000
+Try the following movements and watch the terminal output:
 
-Source your bash configuration and restart the ROS 2 daemon to clear any old discovery caches:
+* **Go Straight:** Notice that only `linear.x` has a value.
+* **Turn in Place:** Notice that only `angular.z` has a value.
+* **Curved Path:** Use the "diagonal" keys (like `u` or `o`). Observe that **both** `linear.x` and `angular.z` have non-zero values simultaneously.
 
-```bash
-source ~/.bashrc
-ros2 daemon stop; sleep 5; ros2 daemon start
+> **Reflection:** When you write your Python node, you are simply automating these same numbers!
+
+---
+
+## 7. Task 3: Python Motion Node
+
+```warning
+**Do NOT write your ROS 2 nodes directly on the robot.** Since you are sharing hardware and ROS 2 is distributed, you must program and run your nodes within packages on your **respective VMs**.
 ```
 
+Each student must implement **one** of the following shapes. Coordinate with your team to ensure no duplicates.
 
-#### Step 3: Setup Environment to use ROBOT
-1. Open a terminal and run 
-```bash
-set-ros-env robot
+| Shape | Required Logic | External Turn Angle |
+| --- | --- | --- |
+| **Choice A: Rectangle** | 4 sides (Length: 1.0m, Width: 0.5m) | 90° |
+| **Choice B: Triangle** | 3 equal sides (Length: 0.8m) | 120° |
+| **Choice C: Pentagon** | 5 equal sides (Length: 0.6m) | 72° |
+
+### Starter Code Template (`robot_drive.py`)
+
+> This is just a reference code. You can write the node in any way you wish you to.
+
+```python
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+import time
+
+class RobotDrive(Node):
+    def __init__(self):
+        super().__init__('robot_drive')
+        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        time.sleep(1) # Wait for publisher to register
+        self.get_logger().info('Starting Motion Loop...')
+        self.execute_shape()
+
+    def move_forward(self, duration):
+        msg = Twist()
+        msg.linear.x = 0.2  # 0.2 m/s
+        self.publisher_.publish(msg)
+        time.sleep(duration)
+        self.stop()
+
+    def turn_robot(self, duration):
+        msg = Twist()
+        msg.angular.z = 0.5 # rad/s
+        self.publisher_.publish(msg)
+        time.sleep(duration) 
+        self.stop()
+
+    def stop(self):
+        self.publisher_.publish(Twist())
+        time.sleep(0.5)
+
+    def execute_shape(self):
+        # TODO: Implement your choice (A, B, or C) here using loops
+        pass
+
+def main():
+    rclpy.init()
+    node = RobotDrive()
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+
 ```
-> This a wrapper script that helps you setup the necessary env variables to work with a robot or with a simulator. The available options for `set-ros-env` are `sim` or `robot` to use a simulation environment or real robot environment, respectively.
 
-2. Close ALL the open terminals before you continue so that the new changes are in effect.
+---
 
-
-
-#### Shutdown Gracefully
-
-1. Move the robot out of the charger.
-2. Open a terminal and run 
-```bash
-sudo shutdown -h now
-```
-3. Wait for 20 secs to allow the RPi to shutdown completely.
-4. Press and hold the Power Button (Large button with a ring light) for about 8 secs, until you here a chime.
+## 8. Submission Instructions
+1. **Your Script:** `robot_drive.py` (Include your shape choice in the comments).
+2. **Video Submission:** A clear unedited video showing (in the order below):
+* You running `hostname; check-ros` on your VM terminal in your laptop.
+* The physical robot completing the shape on the floor.
+* After the robot stopped, recording tour laptop screen showing **RViz** with live LiDAR data.
+  
+---

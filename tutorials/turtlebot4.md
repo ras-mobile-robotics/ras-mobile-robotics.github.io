@@ -6,7 +6,7 @@ sort: 4
 ---
 # TurtleBot 4 Hardware & Software Reference
 
-The **TurtleBot 4** is the next-generation robotics platform for learning and development, built on the **iRobot® Create® 3** educational robot and powered by a **Raspberry Pi 4B**. This reference covers both the Standard and Lite models using the **ROS 2 Jazzy Jalisco** software stack.
+The **TurtleBot 4** is a robotics platform for learning and development, built on the **iRobot® Create® 3** educational robot and powered by a **Raspberry Pi 4B**. This reference covers both the Standard and Lite models using the **ROS 2 Jazzy Jalisco** software stack.
 
 ---
 
@@ -56,55 +56,47 @@ The LED ring on the mobile base provides the primary visual feedback for the rob
 
 | Color & Pattern | Meaning | Action Required |
 | :--- | :--- | :--- |
-| **Solid White** | **Ready.** System is idle and connected. | None. You can now run ROS 2 nodes. |
+| **Solid White** | **Ready.** System is idle and connected. | None. You can now run ROS 2 nodes if the RPi is ready. |
 | **Circling White** | **Booting.** Application is starting up. | **Wait.** This can take 2–5 minutes. |
-| **Spinning Blue** | **AP Mode.** Robot is a Wi-Fi hotspot. | Connect your laptop to `Create-XXXX`. |
-| **Solid Cyan** | **AP Connected.** Device is linked to Robot AP. | Complete the web setup at `192.168.10.1`. |
-| **Pulsing Green** | **Charging.** Battery is filling. | None. Leave on dock until solid green. |
+| **Spinning Blue** | **AP Mode.** Create Base is a Wi-Fi hotspot. | Connect your laptop to `Create-XXXX`. |
+| **Solid Blue** | **AP Connected.** Device is linked to Robot AP. | Complete the web setup at `192.168.10.1`. |
 | **Solid Red** | **System Error.** Motor stall or cliff sensor. | Clear obstacles or debris from the wheels. |
-| **Pulsing Red** | **Battery Low.** Needs charging. | Manually place the robot on the dock. |
-| **Spinning Red** | **Critical Error.** Initialization failed. | **Hard Reboot.** Hold Power for 20 seconds. |
+| **Pulsing Red** | **Battery Low.** Needs charging. | Place the robot on the dock. |
+<!-- | **Spinning Red** | **Critical Error.** Initialization failed. | **Hard Reboot.** Hold Power for 20 seconds. | -->
+<!-- | **Pulsing Green** | **Charging.** Battery is filling. | None. Leave on dock until solid green. | -->
 
 ---
+
+lidar wont work when charging
 
 ## 4. Power Management
 
 The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Base**. Correct shutdown is essential to prevent SD card corruption.
 
-### Powering ON
-- **Docking (Best):** Place the robot on the powered Charging Dock; it will auto-boot.
-- **Manual:** Press the **Power Button** on the Create® 3 base once.
+### Startup
+1. Place the robot on the charger dock.
+2. Wait ~3 minutes for the robot to initialize:
+   1. First, you will hear a chime <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio> that indicates the Create Base is booted up
+   2. Soon after, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
 
-### Powering OFF
-1.  **Shutdown the Pi:** Use the terminal to run `sudo shutdown now`.
-2.  **Wait:** Watch the Raspberry Pi's green LED; wait until it stops flickering.
-3.  **Shutdown the Base:** Press and hold the **Power Button** on the Create® 3 base for **12 seconds** until you hear the descending chime.
+### Graceful Shutdown
+> This procedure ensures a graceful shutdown of both the Raspberry Pi and the Create 3 base, preventing SD card corruption and hardware-level data loss.
 
----
-
-## 5. Network Configuration (AP Mode)
-
-If you need to update Wi-Fi credentials or change the network without a router, use Access Point (AP) mode:
-
-1.  **Enter Configuration:** Press and hold **Buttons 1 and 2** simultaneously until the LED ring turns **Solid Yellow**.
-2.  **Activate AP Mode:** Press and hold **Buttons 1 and 2** again until the ring begins **Spinning Blue**.
-3.  **Connect:** On your PC, connect to the Wi-Fi network `Create-XXXX`.
-4.  **Web UI:** Navigate to `192.168.10.1` in your browser to configure settings.
+1. Move the robot off the charger.
+2. In your SSH session: `sudo shutdown -h now`.
+3. Wait 30 seconds, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
 
 ---
 
-## 6. User Interface (Standard Model Only)
+## 5. Robot Audio Cues
 
-The Standard model features a dedicated UI board on the top plate.
+- **Create Base - Startup Chime** <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio>
+- **Robot Ready - Startup Chime** <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio>
+- **Low Battery Warning** <audio controls src="{{ '/assets/audio/low_battery.wav' | relative_url }}"></audio>
+- **Create Base - Shutdown Chime** <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio>
 
-- **OLED Display:** Provides real-time data including Robot Name, IP Address, Battery Percentage, and ROS Domain ID.
-- **Button 1:** Default mapped to the E-Stop.
-- **Button 2:** Default mapped to "Return to Dock".
-- **Buttons 3 & 4:** User-programmable via the `/joy` topic.
 
----
-
-## 7. Official Documentation & Links
+## 6. Official Documentation & Links
 
 - **[TurtleBot 4 User Manual (Official)](https://turtlebot.github.io/turtlebot4-user-manual/)**
 - **[Jazzy Software & Navigation Guide](https://turtlebot.github.io/turtlebot4-user-manual/tutorials/navigation.html)**
