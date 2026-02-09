@@ -63,6 +63,7 @@ The LED ring on the mobile base provides the primary visual feedback for the rob
 | **Solid Blue** | **AP Connected.** Device is linked to Robot AP. | Complete the web setup at `192.168.10.1`. |
 | **Solid Red** | **System Error.** Motor stall or cliff sensor. | Clear obstacles or debris from the wheels. |
 | **Pulsing Red** | **Battery Low.** Needs charging. | Place the robot on the dock. |
+| **Amber** | **Robot Lifted** The robot does not sense a floor beneath it. | Put it back (upright) on the floor. |
 <!-- | **Spinning Red** | **Critical Error.** Initialization failed. | **Hard Reboot.** Hold Power for 20 seconds. | -->
 <!-- | **Pulsing Green** | **Charging.** Battery is filling. | None. Leave on dock until solid green. | -->
 
