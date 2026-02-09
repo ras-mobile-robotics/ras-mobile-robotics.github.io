@@ -4,11 +4,6 @@ title: "Robot Setup, Basic Motion and Visualizatoin"
 sort: 3
 ---
 
-```danger
-## Under Construction
-This guide is currently being updated for the <strong>Fall 2025</strong> semester. Please note that some screenshots or terminal commands may change before the final release.
-```
-
 # Lab 3: Robot Setup, Basic Motion, and Visualization
 
 In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physical **TurtleBot 4** via a **Discovery Server**, visualize real-time sensor data in **RViz2**, and write a **Python node** to navigate the robot in a specific geometric path.
