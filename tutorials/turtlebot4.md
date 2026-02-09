@@ -68,9 +68,6 @@ The LED ring on the mobile base provides the primary visual feedback for the rob
 <!-- | **Pulsing Green** | **Charging.** Battery is filling. | None. Leave on dock until solid green. | -->
 
 ---
-
-lidar wont work when charging
-
 ## 4. Power Management
 
 The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Base**. Correct shutdown is essential to prevent SD card corruption.
@@ -103,11 +100,29 @@ The LiDar stops spinning when the robot is ready and docked. Once, undocked it w
 ## 7. ROS Communication Issues
 
 ### 7.1. Time
-Sometimes the time is out of sync. 
-In your robot terminal:
-Check time using timedatectl and update the time using the command: sync-ntp-time
 
-## 6. Official Documentation & Links
+ROS 2 uses system timestamps to synchronize sensor data and coordinate transforms (TF). If clocks differ by even a fraction of a second, the robot may ignore commands or fail to map its surroundings.
+
+#### Check Status
+In your robot terminal, verify if the clock is synchronized:
+
+```bash
+timedatectl status
+```
+
+Check if the time and timezone is correct.
+Look for `System clock synchronized: yes` and `NTP service: active`. 
+
+#### Update Time
+If the clocks are out of sync, force an update using the custom lab command:
+
+```bash
+sync-ntp-time
+```
+
+---
+
+## 8. Official Documentation & Links
 
 - **[TurtleBot 4 User Manual (Official)](https://turtlebot.github.io/turtlebot4-user-manual/)**
 - **[Jazzy Software & Navigation Guide](https://turtlebot.github.io/turtlebot4-user-manual/tutorials/navigation.html)**

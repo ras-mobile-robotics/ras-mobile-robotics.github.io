@@ -12,7 +12,7 @@ In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physi
 
 ## 1. Collaboration & Submission Policy
 
-Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4]((#7-task-4-robot-motion-node)) (Rectangle, Triangle, or Pentagon).
+Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4](#7-task-4-robot-motion-node) (Rectangle, Triangle, or Pentagon).
 
 ## 2. Power Management
 
@@ -98,7 +98,7 @@ ssh ubuntu@robot
 
 You will see a warning: "The authenticity of host... can't be established." when you connect to a remote machine for the first time. Type **yes** and press Enter.
 
-### 4.3. Check Nodes
+### 4.3. Check Nodes and Topics in the Robot
 
 Once logged in via SSH, verify the sensors are broadcasting:
 
@@ -108,7 +108,22 @@ ros2 node list
 
 You should see nodes like `/motion_control`, `/oakd`, and `/rplidar_node`.
 
-> If your VM env is setup correctly, you can also run the same command on your VM.
+### 4.4. Check Nodes and Topics in the VM
+
+In your VM terminal:
+
+```bash
+ros2 node list
+```
+
+CHeck if you see topic messages:
+
+```bash
+ros2 topic echo /robot_<XX>/battery_state
+```
+
+If your VM environment is setup correctly, every few seconds, you should see a battery state message.
+Check [ROS Communication Issues](../tutorials/turtlebot4#ros-communication-issues) or ask for help.
 
 ---
 
