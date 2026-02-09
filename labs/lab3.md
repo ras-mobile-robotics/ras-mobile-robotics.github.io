@@ -12,7 +12,7 @@ In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physi
 
 ## 1. Collaboration & Submission Policy
 
-Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4]((../labs/lab2#7-task-4-robot-motion-node)) (Rectangle, Triangle, or Pentagon).
+Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4]((#7-task-4-robot-motion-node)) (Rectangle, Triangle, or Pentagon).
 
 ## 2. Power Management
 
@@ -157,7 +157,7 @@ Open another terminal and "eavesdrop" on the commands being sent to the robot:
 ros2 topic echo /robot_<XX>/cmd_vel
 ```
 
-The teleop_twist_keyboard node is sending the appropriate commands to the topic /robot_<RID>/cmd_vel based on the key you pressed.
+The teleop_twist_keyboard node is sending the appropriate commands to the topic /robot_<XX>/cmd_vel based on the key you pressed.
 
 ### 3. Observe the Patterns
 
