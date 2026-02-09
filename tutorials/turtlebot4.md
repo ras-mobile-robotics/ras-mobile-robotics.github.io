@@ -17,6 +17,7 @@ The TurtleBot 4 is available in two configurations. While both share the same mo
 
 
 ### Core Technical Specifications
+
 | Feature | TurtleBot 4 Lite | TurtleBot 4 Standard |
 | :--- | :--- | :--- |
 | **Dimensions** | 342 x 339 x 192 mm | 342 x 339 x 351 mm |
