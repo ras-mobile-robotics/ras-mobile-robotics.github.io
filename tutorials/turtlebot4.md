@@ -76,16 +76,19 @@ The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Ba
 
 ### Startup
 1. Place the robot on the charger dock.
-2. Wait ~3 minutes for the robot to initialize:
+2. Wait ~3 minutes for the robot to initialize (a white light rotates/pulses during the boot process):
    1. First, you will hear a chime <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio> that indicates the Create Base is booted up
-   2. Soon after, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
+   2. Around 45 seconds later, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
 
 ### Graceful Shutdown
 > This procedure ensures a graceful shutdown of both the Raspberry Pi and the Create 3 base, preventing SD card corruption and hardware-level data loss.
 
 1. Move the robot off the charger.
 2. In your SSH session: `sudo shutdown -h now`.
-3. Wait 30 seconds, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
+3. Wait 30 seconds until the **LiDAR stops spinning**, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
+
+### LiDAR
+The LiDar stops spinning when the robot is ready and docked. Once, undocked it will start spinning again and steam the data.
 
 ---
 
@@ -96,6 +99,12 @@ The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Ba
 - **Low Battery Warning** <audio controls src="{{ '/assets/audio/low_battery.wav' | relative_url }}"></audio>
 - **Create Base - Shutdown Chime** <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio>
 
+## 7. ROS Communication Issues
+
+### 7.1. Time
+Sometimes the time is out of sync. 
+In your robot terminal:
+Check time using timedatectl and update the time using the command: sync-ntp-time
 
 ## 6. Official Documentation & Links
 

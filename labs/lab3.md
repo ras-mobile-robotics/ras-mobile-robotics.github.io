@@ -22,14 +22,14 @@ The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Ba
 1. Place the robot on the charger dock.
 2. Wait ~3 minutes for the robot to initialize:
    1. First, you will hear a chime <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio> that indicates the Create Base is booted up
-   2. Soon after, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
+   2. Around 45 seconds later, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the **Robot is ready to use!**
 
 ### 2.2. Graceful Shutdown
 > This procedure ensures a graceful shutdown of both the Raspberry Pi and the Create 3 base, preventing SD card corruption and hardware-level data loss.
 
 1. Move the robot off the charger.
 2. In your SSH session: `sudo shutdown -h now`.
-3. Wait 30 seconds, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
+3. Wait 30 seconds until the **LiDAR stops spinning**, then hold the **Power Button** (large ring button) for about 8 seconds until you hear a chime <audio controls src="{{ '/assets/audio/cb_shutdown.wav' | relative_url }}"></audio> and the LED turn off.
 
 ---
 
@@ -47,7 +47,19 @@ git pull
 ```
 ---
 
-### 3.2. Setup Bridged Network Mode
+Instruct your VM to use the Robot's Discovery Server instead of its own that was used during your simulation:
+```bash
+set-ros-env robot
+```
+
+Now, reboot your VM for the new environment setup to be used:
+```bash
+sudo reboot -h now
+```
+
+### 3.2. Connect your computer to the Lab Wifi!
+
+### 3.3. Setup Bridged Network Mode
 
 Your VM must be in **Bridged Network** mode to act as a physical device on the local network.
 
@@ -107,36 +119,42 @@ Read this [RViz2 User Guide](https://docs.ros.org/en/jazzy/Tutorials/Intermediat
 > You do not need to install RViz2; it is pre-installed in your VM. 
 
 Launch **RViz2** on your VM (locally, **not** via SSH) to visualize the robot's "eyes."
-1. **Run RViz:** Type `rviz2` in your VM terminal.
+1. **Run RViz:** Type `run-lab-rviz` in your VM terminal.
+> This is a custom rviz launch command that takes into account your robot namespace.
 2. **Global Options:** Set **Fixed Frame** to `rplidar_link`.
-> *Note:* The `scan` messages use this frame ID. If you use `map` without SLAM running, the data will not appear.
+> *Note:* The `scan` messages use this frame ID. If you use `map` without SLAM/Localization running, the data will not appear. We will learn how to build a map later in the course.
 
 1. **Add Displays:**
-* **LaserScan:** Topic `/scan` (Set Reliability to **Best Effort**).
+* **LaserScan:** Topic `/robot_<XX>/scan` (Set Reliability to **Best Effort**).
 > The LIDAR does not spin when the turlebot is docked!
+> <XX> is your Robot ID.
 * **TF:** To see the robot's transform tree.
-* **Image:** Topic `/color/preview/image` to see the OAK-D camera feed.
+* **Image:** Topic `/robot_<XX>/robot_11/oakd/rgb/preview/image_raw` to see the OAK-D camera feed.
+
+RViz is super helpful when debugging your assignments, so play around with the GUI and familiarize yourself with the UI. 
+Change the Fixed Frame, add other topics, change colors of the data visualized, save RViz configs, etc.
 
 ---
 
 ## 6. Task 3: Manual Control and Message Inspection
 
-Before writing your script, you should manually drive the robot to observe how the `/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
+Before writing your script, you should manually drive the robot to observe how the `/robot_<XX>/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
 
 ### 1. Run Teleop (VM Terminal)
 
 Open a new terminal on your VM and run the keyboard teleop node:
 
 ```bash
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+run-lab-teleop
 ```
+> Its a command that runs the same teleop node you used in your simulation. The command uses the right namespace for the roboto your are using.
 
 ### 2. Echo the Velocity Topic (Second VM Terminal)
 
 Open another terminal and "eavesdrop" on the commands being sent to the robot:
 
 ```bash
-ros2 topic echo /cmd_vel
+ros2 topic echo /robot_<XX>/cmd_vel
 ```
 
 The teleop_twist_keyboard node is sending the appropriate commands to the topic /robot_<RID>/cmd_vel based on the key you pressed.
