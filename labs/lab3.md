@@ -12,7 +12,7 @@ In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physi
 
 ## 1. Collaboration & Submission Policy
 
-Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from Task 3 (Rectangle, Triangle, or Pentagon).
+Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4]((../labs/lab2#7-task-4-robot-motion-node)) (Rectangle, Triangle, or Pentagon).
 
 ## 3. Power Management
 
@@ -103,7 +103,7 @@ You should see nodes like `/motion_control`, `/oakd`, and `/rplidar_node`.
 ## 6. Task 2: Sensor Visualization (RViz2)
 RViz2 (ROS Visualization) is a 3D visualizer that allows you to see what the (real or simulated) robot "sees." It takes abstract data, like sensor readings, camera feeds, and coordinate frames, and renders them into a 3D environment that humans can understand.
 
-Read this [RViz2 tutorial](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html) before proceeding further. 
+Read this [RViz2 User Guide](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html) before proceeding further. 
 > You do not need to install RViz2; it is pre-installed in your VM. 
 
 Launch **RViz2** on your VM (locally, **not** via SSH) to visualize the robot's "eyes."
@@ -118,7 +118,7 @@ Launch **RViz2** on your VM (locally, **not** via SSH) to visualize the robot's 
 
 ---
 
-## 7. Task 4: Manual Control and Message Inspection
+## 7. Task 3: Manual Control and Message Inspection
 
 Before writing your script, you should manually drive the robot to observe how the `/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
 
@@ -152,7 +152,7 @@ Try the following movements and watch the terminal output:
 
 ---
 
-## 7. Task 3: Python Motion Node
+## 7. Task 4: Robot Motion Node
 
 ```warning
 **Do NOT write your ROS 2 nodes directly on the robot.** Since you are sharing hardware and ROS 2 is distributed, you must program and run your nodes within packages on your **respective VMs**.
@@ -168,7 +168,7 @@ Each student must implement **one** of the following shapes. Coordinate with you
 
 ### Starter Code Template (`robot_drive.py`)
 
-> This is just a reference code. You can write the node in any way you wish you to.
+> Below is a reference code. You are free to modify the structure or implementation as needed.
 
 ```python
 import rclpy
