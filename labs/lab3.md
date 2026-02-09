@@ -140,7 +140,7 @@ Change the Fixed Frame, add other topics, change colors of the data visualized, 
 
 Before writing your script, you should manually drive the robot to observe how the `/robot_<XX>/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
 
-### 1. Run Teleop (VM Terminal)
+### 6.1. Run Teleop (VM Terminal)
 
 Open a new terminal on your VM and run the keyboard teleop node:
 
@@ -149,7 +149,7 @@ run-lab-teleop
 ```
 > Its a command that runs the same teleop node you used in your simulation. The command uses the right namespace for the roboto your are using.
 
-### 2. Echo the Velocity Topic (Second VM Terminal)
+### 6.2. Echo the Velocity Topic (Second VM Terminal)
 
 Open another terminal and "eavesdrop" on the commands being sent to the robot:
 
@@ -159,7 +159,7 @@ ros2 topic echo /robot_<XX>/cmd_vel
 
 The teleop_twist_keyboard node is sending the appropriate commands to the topic /robot_<XX>/cmd_vel based on the key you pressed.
 
-### 3. Observe the Patterns
+### 6.3. Observe the Patterns
 
 Try the following movements and watch the terminal output:
 
