@@ -14,17 +14,17 @@ In this lab, you will configure your Ubuntu 24.04 VM to communicate with a physi
 
 Students work in groups of three to share one physical robot. You are encouraged to collaborate on setup and troubleshooting. However, **each student must submit their own unique motion script**. To ensure individual work, each member of your trio must choose a different shape from [Task 4]((../labs/lab2#7-task-4-robot-motion-node)) (Rectangle, Triangle, or Pentagon).
 
-## 3. Power Management
+## 2. Power Management
 
 The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Base**. Correct shutdown is essential to prevent SD card corruption.
 
-### Startup
+### 2.1. Startup
 1. Place the robot on the charger dock.
 2. Wait ~3 minutes for the robot to initialize:
    1. First, you will hear a chime <audio controls src="{{ '/assets/audio/cb_startup.wav' | relative_url }}"></audio> that indicates the Create Base is booted up
    2. Soon after, you will hear a second chime <audio controls src="{{ '/assets/audio/robot_ready.wav' | relative_url }}"></audio> while a **fast purple light** rotating in the ring. This indicates the RPi and Create 3 are communicating, and the Robot is ready to use!
 
-### Graceful Shutdown
+### 2.2. Graceful Shutdown
 > This procedure ensures a graceful shutdown of both the Raspberry Pi and the Create 3 base, preventing SD card corruption and hardware-level data loss.
 
 1. Move the robot off the charger.
@@ -33,9 +33,9 @@ The TurtleBot 4 uses two systems: the **Raspberry Pi 4** and the **Create® 3 Ba
 
 ---
 
-## 4. Environment Setup
+## 3. Environment Setup
 
-### 4.1 ROS2 Environment Setup
+### 3.1. ROS2 Environment Setup
 To ensure you only communicate with your assigned robot, we use specific **Domain IDs** and a **FastDDS Discovery Server**.
 
 Run the commands below to pull the latest changes and run the setup script:
@@ -47,7 +47,7 @@ git pull
 ```
 ---
 
-### 4.2 Setup Bridged Network Mode
+### 3.2. Setup Bridged Network Mode
 
 Your VM must be in **Bridged Network** mode to act as a physical device on the local network.
 
@@ -63,9 +63,9 @@ The output should show a local IP address (e.g., `192.168.50.x`). If it shows `1
 
 ---
 
-## 5. Task 1: Remote Access and Hardware Check
+## 4. Task 1: Remote Access and Hardware Check
 
-### 1. Ping the Robot
+### 4.1. Ping the Robot
 
 ```bash
 ping turtlebot
@@ -73,7 +73,7 @@ ping turtlebot
 
 > `turtlebot` is a hostname that translates to the IP address of your specific robot, configured by the `setup_robot_env.sh` script. It makes your life easier by not having to remember the IP Address of your robot.
 
-### 2. SSH into the Robot
+### 4.2. SSH into the Robot
 
 SSH (Secure Shell) is the industry-standard method for connecting to a remote computer (like your TurtleBot 4 or a VM) over a network. It encrypts all traffic to prevent eavesdropping.
 
@@ -86,7 +86,7 @@ ssh ubuntu@robot
 
 You will see a warning: "The authenticity of host... can't be established." when you connect to a remote machine for the first time. Type **yes** and press Enter.
 
-### 3. Check Nodes
+### 4.3. Check Nodes
 
 Once logged in via SSH, verify the sensors are broadcasting:
 
@@ -100,7 +100,7 @@ You should see nodes like `/motion_control`, `/oakd`, and `/rplidar_node`.
 
 ---
 
-## 6. Task 2: Sensor Visualization (RViz2)
+## 5. Task 2: Sensor Visualization (RViz2)
 RViz2 (ROS Visualization) is a 3D visualizer that allows you to see what the (real or simulated) robot "sees." It takes abstract data, like sensor readings, camera feeds, and coordinate frames, and renders them into a 3D environment that humans can understand.
 
 Read this [RViz2 User Guide](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/RViz-User-Guide/RViz-User-Guide.html) before proceeding further. 
@@ -113,12 +113,13 @@ Launch **RViz2** on your VM (locally, **not** via SSH) to visualize the robot's 
 
 1. **Add Displays:**
 * **LaserScan:** Topic `/scan` (Set Reliability to **Best Effort**).
+> The LIDAR does not spin when the turlebot is docked!
 * **TF:** To see the robot's transform tree.
 * **Image:** Topic `/color/preview/image` to see the OAK-D camera feed.
 
 ---
 
-## 7. Task 3: Manual Control and Message Inspection
+## 6. Task 3: Manual Control and Message Inspection
 
 Before writing your script, you should manually drive the robot to observe how the `/cmd_vel` topic translates movement into data. In Lab 3, you did this with a simualted robot.
 
