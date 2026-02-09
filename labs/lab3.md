@@ -106,7 +106,7 @@ Once logged in via SSH, verify the sensors are broadcasting:
 ros2 node list
 ```
 
-You should see nodes like `/motion_control`, `/oakd`, and `/rplidar_node`.
+You should see nodes like `/motion_control` and `/oakd`.
 
 ### 4.4. Check Nodes and Topics in the VM
 
@@ -121,6 +121,8 @@ CHeck if you see topic messages:
 ```bash
 ros2 topic echo /robot_<XX>/battery_state
 ```
+
+> <XX> is your Robot ID.
 
 If your VM environment is setup correctly, every few seconds, you should see a battery state message.
 Check [ROS Communication Issues](../tutorials/turtlebot4#ros-communication-issues) or ask for help.
