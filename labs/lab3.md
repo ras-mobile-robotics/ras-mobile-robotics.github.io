@@ -92,7 +92,7 @@ SSH (Secure Shell) is the industry-standard method for connecting to a remote co
 It creates an encrypted tunnel to the robot. Once you authenticate, your local terminal "hands over" its interface to the remote machine. You are no longer typing on your laptop; your command prompt effectively "teleports" to the robot, and every command executes on the robot's processor.
 
 ```bash
-ssh ubuntu@robot
+ssh ubuntu@turtlebot
 ```
 > **Password:** `turtlebot`
 
@@ -209,33 +209,41 @@ Each student must implement **one** of the following shapes. Coordinate with you
 ```python
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import TwistStamped # Changed
 import time
 
 class RobotDrive(Node):
     def __init__(self):
         super().__init__('robot_drive')
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
-        time.sleep(1) # Wait for publisher to register
+        self.publisher_ = self.create_publisher(TwistStamped, '/cmd_vel', 10)
+        time.sleep(1) 
         self.get_logger().info('Starting Motion Loop...')
         self.execute_shape()
 
+    def create_stamped_msg(self, linear_x=0.0, angular_z=0.0):
+        """Helper to create a TwistStamped message with current time."""
+        msg = TwistStamped()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = 'base_link' # Common frame for velocity
+        msg.twist.linear.x = linear_x
+        msg.twist.angular.z = angular_z
+        return msg
+
     def move_forward(self, duration):
-        msg = Twist()
-        msg.linear.x = 0.2  # 0.2 m/s
+        msg = self.create_stamped_msg(linear_x=0.2)
         self.publisher_.publish(msg)
         time.sleep(duration)
         self.stop()
 
     def turn_robot(self, duration):
-        msg = Twist()
-        msg.angular.z = 0.5 # rad/s
+        msg = self.create_stamped_msg(angular_z=0.5)
         self.publisher_.publish(msg)
         time.sleep(duration) 
         self.stop()
 
     def stop(self):
-        self.publisher_.publish(Twist())
+        msg = self.create_stamped_msg() # Defaults to zeros
+        self.publisher_.publish(msg)
         time.sleep(0.5)
 
     def execute_shape(self):
