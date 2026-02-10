@@ -33,4 +33,10 @@ chmod +x bare_metal_setup.sh
 ./bare_metal_setup.sh
 ```
 
+### 3. How to follow Lab instructions?
+
+Skip the following:
+- Steps that are not conerned with the VM configuration (VM network setup, Hardware Acceleration, etc)
+- All `set-ros-env` commands
+
 ---
