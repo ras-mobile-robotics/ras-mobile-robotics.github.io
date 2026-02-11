@@ -16,6 +16,7 @@ sort: 3
 - `mkdir [name]`: **Make Directory**. Creates a new folder.
 - `sudo`: **SuperUser Do**. Runs a command with "Admin" privileges.
 - `cat [file]`: **Concatenate**. Displays the text inside a file in the terminal.
+- `clear`: **Clear Screen**. Clear the display in the terminal.
 
 ## 2. SSH (Secure Shell)
 SSH is used to log into a remote computer (like your TurtleBot 4) securely.
@@ -39,6 +40,13 @@ Once you start tmux, press your **Prefix** key (`Ctrl+b`) then the key:
 - `c` : Create a **New Tab** (Window).
 - `x` : Close the current **Tab**.
 - `s` : **Switch Sessions**. Switch between different tmux sessions.
+
+All keybindings must start with the **Prefix** key!
+
+### 3.3 Copy and Paste
+
+- To Copy: Hold Shift + Highlight with mouse.
+- To Paste: Ctrl + Shift + V or  Shift + Middle Click.
 
 ### 3.3. Attaching:
 If your terminal closes, just log back in and type:
