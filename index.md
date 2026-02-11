@@ -31,7 +31,8 @@ Subject to change based on class size, group formation, and lab availability
 | 4 | Feb 2 | M | A Primer on Perception | Overview of Robot Sensors and Levels of Perception | 30 min |  |  |
 | 4 | Feb 4 | W | Range Sensors | Line fitting (RANSAC, Hough Transform) | 20 min | Lab 3: Robot Setup | Lab 2: Simulation |
 | 5 | Feb 9 | M | Robot Setup | Robot Setup | 75 min |  |  |
-| 5 | Feb 11 | W | Image Processing | Color spaces, filters, edge detection | 20 min | Report: Form Groups and Initial Ideas |  |
+| 5 | Feb 11 | W | Image Processing | Color spaces, filters, edge detection | 20 min |  |  |
+| 5 | Feb 13 | F |  |  |  | Report: Form Groups and Initial Ideas |  |
 | 6 | Feb 16 | M | Feature Matching | SIFT, ORB | 20 min | Lab 4: Sensor-Motor Loop | Lab 3: Robot Setup |
 | 6 | Feb 18 | W | 3D Point Clouds and Filtering | Voxel grid, statistical outlier, pass-through filters | 20 min |  |  |
 | 7 | Feb 23 | M | Segmentation and Registration | Euclidean Cluster Extraction & ICP |  | Assignment 1: Perception | Lab 4: Sensor-Motor Loop |
