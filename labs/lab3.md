@@ -196,6 +196,8 @@ Try the following movements and watch the terminal output:
 
 Each student must implement **one** of the following shapes. Coordinate with your team to ensure no duplicates.
 
+**All the lengths are approximate values.** 
+
 | Shape | Required Logic | External Turn Angle |
 | --- | --- | --- |
 | **Choice A: Rectangle** | 4 sides (Length: 1.0m, Width: 0.5m) | 90° |
