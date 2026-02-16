@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Robot Setup, Basic Motion and Visualizatoin"
+title: "Robot Setup, Basic Motion and Visualization"
 sort: 3
 ---
 
