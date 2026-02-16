@@ -3,6 +3,10 @@ remote_theme: clearpathrobotics/jekyll-rtd-theme
 title: "RAS 598: Mobile Robotics - Course Website"
 description: "Course Website for RAS 598: Mobile Robotics"
 
+back_to_top: true
+back_to_top_text: "Back to top"
+
+
 # Theme Plugins (Supported by GitHub Pages)
 plugins:
   - jekyll-remote-theme

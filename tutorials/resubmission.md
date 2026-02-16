@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Resubmission
+title: Re-Submission Template
 parent: Tutorials
 sort: 5
 ---
 
 # Resubmission Change Order
 
-- **Assignment:** [e.g., Lab 2]
+- **Assignment:** [e.g., Assignment 2]
 - **Date:** YYYY-MM-DD
 - **Student Name:** [Your Name]
 - **Original Submission Date:** YYYY-MM-DD
