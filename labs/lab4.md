@@ -43,7 +43,7 @@ Learn to interact with services via the terminal to debug your nodes using the t
 Learn how to implement the service server logic within a Python node using the tutorial
 [here](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html).
 
-### 0.3 Understaing Parameters:
+### 0.3 Understanding Parameters:
 
 Learn to interact with parameters using the tutorials
 [Understanding ROS2 Parameters](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html)
@@ -69,6 +69,10 @@ Students work in groups of three to share one physical robot. You are encouraged
 | **Choice A** | Obstacle < 0.5m (Front) | **The Randomizer:** Randomly rotate either Left or Right between 90° and 180° to find a new path. |
 | **Choice B** | Obstacle < 0.5m (Left **AND** Right) | **The Retreat:** Triggered when the robot feels "squeezed." Perform a full 180° spin to exit the narrow space. |
 | **Choice C** | Obstacle < 0.3m (Front) | **The Smart Pivot:** Perform a 90° turn toward the *clearest* side (whichever side, Left or Right, has the higher distance reading). |
+
+```note
+The Obstacles distances in "Trigger Condition" are measured from the LiDAR. You do not have to use TF for this lab!
+```
 
 ---
 
