@@ -8,6 +8,7 @@ sort: 1
 ```note
 Subject to change based on class size, group formation, and lab availability
 ```
+
 | Wk   | Date   | Day   | Topic                               | Description                                           | Lab Time   | Labs and Assignments START            | Labs and Assignments END              |
 |-----|-------|------|------------------------------------|------------------------------------------------------|-----------|--------------------------------------|--------------------------------------|
 | 1    | Jan 12 | M     | Introduction to Robotics            | Syllabus review & course structure                    |            | Reading for Quiz 1                    |                                       |
