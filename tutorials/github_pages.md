@@ -11,8 +11,8 @@ The [repository](https://github.com/ras-mobile-robotics/project-site-template) u
 
 Setting up the project requires two primary steps: initializing the site and adding your teammates.
 
-```info
-For a quick introduction to git, checkout the [git tutorial](../tutorials/git.md).
+```note
+For a quick introduction to git, checkout the [git tutorial](../tutorials/git).
 ```
 
 ### 1.1 Create the Repository
