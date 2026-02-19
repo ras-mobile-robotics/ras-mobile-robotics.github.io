@@ -84,9 +84,9 @@ It follows the ["V-model" of engineering](https://en.wikipedia.org/wiki/V-model)
 
 ### 3.1. Why this split?
 
-1. **Milestone 1 (100% Doc):** At this stage, teams are often still fighting with design ideas, and workspace setup. Grading 100% on the **Proposal and Architecture** ensures you have a solid plan before they start coding.  It rewards clear thinking over messy, early-stage scripts.
-2. **Milestone 2 (60/40 Split):** This is the transition. After incorporating instructor feedback, teams must explain the **Kinematics** model (Doc) while proving their code can handle **Noise and Robustness** (Tech). The documentation still carries weight because you are still adaptiving and defining the "How".
-3. **Milestone 3 (30/70 Split):** The documentation becomes a "Scientific Dossier" (Benchmarking and Ethics), but the heavy lifting is the **System Integration and Custom Algorithm implementation.** The 70% Technical weight allows you to perform the **Git Audit** and verify that the "Algorithmic Factor" was actually achieved in the repository.
+1. **Milestone 1 (100% Doc):** At this stage, teams are often still contemplating over design ideas, and workspace setup. Grading 100% on the **Proposal and Architecture** ensures teams have a solid plan before they start coding. It rewards clear thinking over messy, early-stage scripts.
+2. **Milestone 2 (60/40 Split):** This is the transition period. After incorporating instructor feedback, teams must explain the **Kinematics** model (Doc) while proving their code can handle **Noise and Robustness** (Tech). The documentation still carries weight because you are still adapting and defining the "How".
+3. **Milestone 3 (30/70 Split):** The documentation becomes a "Scientific Dossier" (Benchmarking and Ethics), but the heavy lifting is the **System Integration and Custom Algorithm implementation**. 
 
 **The project is worth 30% of the total course grade**. Evaluation shifts from theoretical design to technical execution over the semester. In Milestone 1, we grade your **plan**. In Milestone 2, we grade your **understanding**. In Milestone 3, we grade your **code**.
 
