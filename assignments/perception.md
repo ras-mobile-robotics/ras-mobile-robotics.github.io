@@ -7,6 +7,8 @@ sort: 1
 
 # Assignment 1: Semantic Landmark Extraction and Classification
 
+In this assignment, you will process point cloud data recorded in rosbags to implement a perception pipeline that detects and locates cylinders within the robot’s environment.
+
 ## Prerequisites
 * **HSV Color Space:** Read the tutorial on the [HSV Color Space](../tutorials/hsv_color_space.md).
 * **Data Playback:** Review the [ROS 2 Bag Tutorial](https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html) (Recording and Playing Back Data).
@@ -22,7 +24,6 @@ set-ros-env sim
 ```warning
 Make sure you close all open terminals and start fresh after this step to make sure the new settings are sourced!
 ```
-
 
 ```note
 **Bare Metal Configuration:** If you are using a bare metal Ubuntu instead of a VM and this step does not work, please start a Canvas discussion and describe your issue.
@@ -42,14 +43,50 @@ Make sure you close all open terminals and start fresh after this step to make s
 * **The "Pure NumPy" Rule:** All geometric logic, including RANSAC loops, distance calculations, and Linear Solvers, must be written in NumPy. 
 * **Academic Integrity:** If you use a high-level library to bypass the algorithmic work, or ask a LLM to program your assignment, you will fail the oral checkoff.
 
-## 3. Recorded Data
-Download the provided rosbags. To ensure your Python node can keep up with the data processing, play the bag in a loop at a reduced rate:
+## 3. ROS Bags
+
+Download the rosbags from [here](https://arizonastateu-my.sharepoint.com/:f:/g/personal/vsangar2_asurite_asu_edu/IgBHgvuC9WBMR65AStY6-LxdAeQ-QOa9wD4Se8DddV8UWSU?e=Fmi8KP). Unzip the bags for use. Begin with the first bag; its simplicity makes it an ideal starting point.
+
+| name | description | size | md5sum |
+| --- | --- | --- | --- |
+| `rgbd_bag_0` | Single green cylinder | 106M | `b176478b3d7525ef789b37195aa4af20` |
+| `rgbd_bag_1` | Robot moving around different cylinders | 334M | `9c6a8ae75f74c691b6cdacf45f8dc8d6` |
+| `rgbd_bag_2` | Three cylinders | 145M | `2bdc3d8db0925123916cf9a54869d0a6` |
+
+To ensure your Python node can keep up with the data processing, play the bag in a loop at a reduced rate:
 
 ```bash
-ros2 bag play <your_bag_file> --loop --rate 0.5
+ros2 bag play <your_bag_file>.mcap --loop --rate 0.5
 ```
 
-## 2. Skeleton Code
+## 4. Visualization (RViz2)
+RViz2 (ROS Visualization) is a 3D visualizer that allows you to see what the robot "sees." It takes abstract data—sensor readings, camera feeds, and coordinate frames—and renders them into a 3D environment.
+
+#### 4.1. **Launch and Global Configuration**
+
+1. **Run RViz:** Type `rviz2` in your VM terminal.
+2. **Global Options:** Set the **Fixed Frame** to `oakd_rgb_camera_optical_frame`.
+
+```warning
+The Fixed Frame must match the `frame_id` in your PointCloud2 messages (`oakd_rgb_camera_optical_frame`). If the Fixed Frame is set incorrectly, your 3D data will not render or will appear with a "Status: Error" in the displays panel.
+```
+
+Add displays to visualize pointclouds, markers and images.
+
+#### 4.2 **Saving and Loading Configurations**
+
+Manually adding topics every time you launch RViz is inefficient. You should save your setup to a `.rviz` configuration file.
+
+* **To Save:** Go to **File > Save Config As** to save the configuration file.
+* **To Load:** Next time you open RViz, go to **File > Open Config**, or launch it directly from the terminal with the configuration flag:
+
+```bash
+rviz2 -d path/to/your/config.rviz
+```
+
+RViz is a great tool for debugging. Experiment with the GUI: change the background color, particle sizes, etc.
+
+## 4. Skeleton Code
 The following script is a good starting point that handles all the "plumbing": loading your bag files into memory and providing an interactive 3D interface. You are encouraged to modify, edit, or delete any part of this logic; it is designed to be flexible, and there are many valid programming/mathematical approaches to successfully implement this assginment. Make sure to use NumPy operations to avoid slow Python `for` loops.
 
 
@@ -345,7 +382,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## 3 The Pipeline
+## 5. The Pipeline
 
 ### Task 0: Preprocessing (Performance Optimization)
 Raw OAK-D clouds are too dense for pure-Python processing. Also, you will notice that the OAK-D Lite has a lot of noise as the points are furhter away from the camera. It is advised that you perform one or both of the filtering steps:
@@ -372,7 +409,7 @@ Group the remaining points into distinct objects.
 
 3. **Iterative Detection**: Once a cylinder is found, remove its inliers and repeat the process to find the next one.
 
-```hint
+```note
 Use `np.cross` and `np.linalg.norm` to calculate distances for the entire cloud at once rather than looping through points individually.
 ```
 
@@ -383,11 +420,12 @@ For each verified cylinder cluster, calculate the average color of the points, u
 If the color data in the original pointcloud appears misaligned with the physical cylinder in RViz, it may be due to hardware sync issues or motion blur. Use the color data from the points that physically form the cylinder shape.
 ```
 
-## 4. Submission and Checkoff
-* **Git Submission:** Provide a Git repository link, a specific commit hash, and a `.zip` of that commit on Canvas.
+## 6. Submission and Checkoff
+
+**Git Submission:** Provide a Git repository link, a specific commit hash, and a `.zip` of that commit on Canvas.
 
 
-### 4.1. Grading Rubic
+### 6.1. Grading Rubic
 
 | Category | Criteria | Points |
 | --- | --- | --- |
@@ -397,7 +435,7 @@ If the color data in the original pointcloud appears misaligned with the physica
 | **Semantic Labeling** | Accurate conversion from **RGB to HSV**. Correctly identifies the semantic role (Home, Obstacle, Target) based on hue thresholds. | **3** |
 | **ROS Integration** | Proper publishing of `MarkerArray` for RViz. Transformation/Frame IDs are correct, and markers are persistent and stable. | **2** |
 
-### 4.2. Deductions
+### 6.2. Deductions
 
 * **-5 Points:** Use of "Banned Libraries" (Open3D, PCL, or SciPy's RANSAC/Clustering functions). When in doubt, check with the instructor!
 * **-X Points:** You must be able to explain your code (data structure, code flow, algorithm implementation, etc). The oral checkoffs will happen after your submission, based on the code you submitted. 
