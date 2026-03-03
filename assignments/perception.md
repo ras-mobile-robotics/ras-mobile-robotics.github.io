@@ -413,8 +413,8 @@ Group the remaining points into distinct objects.
 Use `np.cross` and `np.linalg.norm` to calculate distances for the entire cloud at once rather than looping through points individually.
 ```
 
-### Task 4: Semantic Labeling via Point Color**
-For each verified cylinder cluster, calculate the average color of the points, use the `rgb_to_hsv()` to convert the color to HSV space, and use a range on the values to group into Red, Green and Blue. Visualize their filtered point cloud in RViz with the right color. 
+### Task 4: Semantic Labeling via Point Color
+For each verified cylinder cluster, calculate the average color of the points, use the `rgb_to_hsv()` to convert the color to HSV space, and use a range on the values to group into Red, Green and Blue. A bonus point for detecting a Pink cylinder (in `rgbd_bag_2` rosbag)! Visualize their filtered point cloud in RViz with the right color. 
 
 ```note
 If the color data in the original pointcloud appears misaligned with the physical cylinder in RViz, it may be due to hardware sync issues or motion blur. Use the color data from the points that physically form the cylinder shape.
@@ -431,9 +431,9 @@ If the color data in the original pointcloud appears misaligned with the physica
 | --- | --- | --- |
 | **Data Preprocessing** | Successful implementation of **Box Filter** and **Voxel Downsampling**. The node must handle the raw cloud without significant lag at 0.5x playback speed. | **3** |
 | **Plane Segmentation** | Robust **RANSAC** implementation that identifies and removes the floor/ceiling. | **3** |
-| **Cylinder Detection** | Correct implementation of **Cylinder RANSAC** using point-normal pairs. Must successfully calculate the axis and identify inliers based on the target radius. | **4** |
-| **Semantic Labeling** | Accurate conversion from **RGB to HSV**. Correctly identifies the semantic role (Home, Obstacle, Target) based on hue thresholds. | **3** |
-| **ROS Integration** | Proper publishing of `MarkerArray` for RViz. Transformation/Frame IDs are correct, and markers are persistent and stable. | **2** |
+| **Cylinder Detection** | Correct implementation of **Cylinder RANSAC** using point-normal pairs. Must successfully calculate the axis and identify inliers based on the target radius. Detect a pink cylinder for **+1 Bonus** in `rgbd_bag_2` rosbag! | **5** |
+| **Semantic Labeling** | Accurate conversion from **RGB to HSV** and correctly identify the color based on hue thresholds. | **3** |
+| **ROS Integration** | Proper publishing of different stages of the pipelines (`PointCloud2` and `MarkerArray`) for RViz. | **1** |
 
 ### 6.2. Deductions
 
