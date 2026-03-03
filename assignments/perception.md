@@ -33,7 +33,7 @@ Make sure you close all open terminals and start fresh after this step to make s
 * Learn **3D point cloud preprocessing** (Box Filtering and Voxel Downsampling).
 * Implement **RANSAC** from first principles for plane segmentation and geometric fitting.
 * Implement **Normal Estimation** using Singular Value Decomposition (SVD) with NumPy.
-* Map physical objects to semantic roles (Home, Obstacle, Target) using **HSV color logic**.
+* Map physical objects to semantic roles (Home, Obstacle, Target based on color. This will be discussed in a later assignment) using **HSV color logic**.
 * Understand ROS 2 data structures for 3D visualization (`MarkerArray` and `PointCloud2`).
 
 ## 2. Technical Constraints
@@ -431,8 +431,8 @@ If the color data in the original pointcloud appears misaligned with the physica
 | --- | --- | --- |
 | **Data Preprocessing** | Successful implementation of **Box Filter** and **Voxel Downsampling**. The node must handle the raw cloud without significant lag at 0.5x playback speed. | **3** |
 | **Plane Segmentation** | Robust **RANSAC** implementation that identifies and removes the floor/ceiling. | **3** |
-| **Cylinder Detection** | Correct implementation of **Cylinder RANSAC** using point-normal pairs. Must successfully calculate the axis and identify inliers based on the target radius. Detect a pink cylinder for **+1 Bonus** in `rgbd_bag_2` rosbag! | **5** |
-| **Semantic Labeling** | Accurate conversion from **RGB to HSV** and correctly identify the color based on hue thresholds. | **3** |
+| **Cylinder Detection** | Correct implementation of **Cylinder RANSAC** using point-normal pairs. Must successfully calculate the axis and identify inliers based on the target radius. | **5** |
+| **Semantic Labeling** | Accurate conversion from **RGB to HSV** and correctly identify the color based on hue thresholds. Detect a pink cylinder for **+1 Bonus** in `rgbd_bag_2` rosbag! | **3** |
 | **ROS Integration** | Proper publishing of different stages of the pipelines (`PointCloud2` and `MarkerArray`) for RViz. | **1** |
 
 ### 6.2. Deductions
