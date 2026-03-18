@@ -34,8 +34,8 @@ Subject to change based on class size, group formation, and lab availability
 | 8    | Mar 6  | F     |                                     |                                                                |                                       | Report: Form Groups and Initial Ideas |
 | 9    | Mar 9  | M     | NO CLASS                            | Spring Break                                                   |                                       |                                       |
 | 9    | Mar 11 | W     | NO CLASS                            | Spring Break                                                   |                                       |                                       |
-| 10   | Mar 16 | M     | Global Planning II                  | Greedy, A*, Dijkstra’s Algorithms                              | Report: Refine Ideas                  |                                       |
-| 10   | Mar 18 | W     | Sampling-based Planners             | RRT and PRM                                                    |                                       |                                       |
+| 10   | Mar 16 | M     | Global Planning II                  | Greedy, A*, Dijkstra’s Algorithms                              |                                       |                                       |
+| 10   | Mar 18 | W     | Sampling-based Planners             | RRT and PRM                                                    | Report: Refine Ideas                  |                                       |
 | 10   | Mar 20 | F     |                                     |                                                                | Assignment 2: Motion Planning         | Assignment 1: Perception              |
 | 11   | Mar 23 | M     | Bayes Filter                        | Uncertainty and Gaussian noise models                          |                                       |                                       |
 | 11   | Mar 25 | W     | Bayes Filter (Cont.)                | Covariance propagation                                         |                                       |                                       |
