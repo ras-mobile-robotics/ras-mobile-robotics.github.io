@@ -9,8 +9,8 @@ sort: 1
 Subject to change based on class size, group formation, and lab availability
 ```
 
-| Wk   | Date   | Day   | Topic                               | Description                                           | Labs and Assignments START            | Labs and Assignments END              |
-|-----|-------|------|------------------------------------|------------------------------------------------------|--------------------------------------|--------------------------------------|
+| Wk   | Date   | Day   | Topic                               | Description                                                    | Labs and Assignments START            | Labs and Assignments END              |
+|-----|-------|------|------------------------------------|---------------------------------------------------------------|--------------------------------------|--------------------------------------|
 | 1    | Jan 12 | M     | Introduction to Robotics            | Syllabus review & course structure                             | Reading for Quiz 1                    |                                       |
 | 1    | Jan 14 | W     | ROS Overview                        | ROS publishers/subscribers, services, params                   | Quiz 0 for Lab 0                      | Reading for Quiz 1                    |
 | 1    | Jan 16 | F     |                                     |                                                                | Lab 1: Setup (VM and ROS Basics)      |                                       |
@@ -36,8 +36,8 @@ Subject to change based on class size, group formation, and lab availability
 | 9    | Mar 11 | W     | NO CLASS                            | Spring Break                                                   |                                       |                                       |
 | 10   | Mar 16 | M     | Global Planning II                  | Greedy, A*, Dijkstra’s Algorithms                              |                                       |                                       |
 | 10   | Mar 18 | W     | Sampling-based Planners             | RRT and PRM                                                    | Report: Refine Ideas                  |                                       |
-| 10   | Mar 20 | F     |                                     |                                                                | Assignment 2: Motion Planning         | Assignment 1: Perception              |
-| 11   | Mar 23 | M     | Bayes Filter                        | Uncertainty and Gaussian noise models                          |                                       |                                       |
+| 10   | Mar 20 | F     |                                     |                                                                |                                       | Assignment 1: Perception              |
+| 11   | Mar 23 | M     | Bayes Filter                        | Uncertainty and Gaussian noise models                          | Assignment 2: Motion Planning         |                                       |
 | 11   | Mar 25 | W     | Bayes Filter (Cont.)                | Covariance propagation                                         |                                       |                                       |
 | 12   | Mar 30 | M     | Sensor Model                        | Beam model and likelihood field model                          |                                       |                                       |
 | 12   | Apr 1  | W     | Motion Model                        | Odometry and velocity models                                   |                                       |                                       |
