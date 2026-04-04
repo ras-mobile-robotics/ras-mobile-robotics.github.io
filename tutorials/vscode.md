@@ -2,7 +2,7 @@
 layout: default
 title: "VS Code & SSH Setup"
 parent: Tutorials
-sort: 6
+sort: 9
 ---
 
 # VS Code & SSH Setup Guide

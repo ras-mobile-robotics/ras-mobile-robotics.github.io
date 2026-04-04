@@ -2,7 +2,7 @@
 layout: default
 title: "Installing Ubuntu 24.04 and ROS2 Jazzy"
 parent: Tutorials
-sort: 7
+sort: 10
 ---
 
 ```warning
