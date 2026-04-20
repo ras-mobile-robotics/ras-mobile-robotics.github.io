@@ -46,13 +46,13 @@ Subject to change based on class size, group formation, and lab availability
 | 13   | Apr 8  | W     | Extended Kalman Filter              | EKF localization & Nonlinear state estimation                  |                                  |                                       |
 | 14   | Apr 13 | M     |                                     |                                                                |                                  |                                       |
 | 14   | Apr 15 | W     | Particle Filter                     | Non-parametric distributions & importance sampling             |                                  |                                       |
-| 13   | Apr 16 | Th    |                                     |                                                                | Assignment 3: Bayes Filter       | Assignment 2: Motion Planning         |
-| 13   | Apr 17 | F     |                                     |                                                                |                                  | Report: Refine Ideas                  |
-| 15   | Apr 20 | M     | Brief Introduction to SLAM          | Introduction to SLAM                                           | Report: Finalize Ideas           |                                       |
-| 15   | Apr 22 | W     | Ethics in AI                        | Theoretical concepts and case studies                          |                                  |                                       |
+| 13   | Apr 16 | Th    |                                     |                                                                |                                  |                                       |
+| 13   | Apr 17 | F     |                                     |                                                                |                                  | Assignment 2: Motion Planning         |
+| 15   | Apr 20 | M     | Brief Introduction to SLAM          | Introduction to SLAM                                           | Assignment 3: Bayes Filter       | Report: Refine Ideas                  |
+| 15   | Apr 22 | W     | Ethics in AI                        | Theoretical concepts and case studies                          | Report: Finalize Ideas           |                                       |
 | 16   | Apr 27 | M     | Ethics in AI                        | Responsibilities and AI ethics                                 |                                  |                                       |
 | 16   | Apr 29 | W     | Project and Class Review            | Last Class                                                     |                                  |                                       |
-| 17   | May 5  | T     |                                     |                                                                |                                  | Assignment 3: Bayes Filter            |
-| 17   | May 6  | W     |                                     |                                                                |                                  | Report: Finalize Ideas                |
-| 17   | May 8  | F     | Final Presentations                 |                                                                |                                  |                                       |
+| 17   | May 5  | T     |                                     |                                                                |                                  |                                       |
+| 17   | May 6  | W     |                                     |                                                                |                                  | Assignment 3: Bayes Filter            |
+| 17   | May 8  | F     | Final Presentations                 |                                                                |                                  | Report: Finalize Ideas                |
 |      |        |       |                                     |                                                                |                                  |                                       |
