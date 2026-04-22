@@ -4,12 +4,6 @@ title: Robot Localization
 parent: Assignments
 sort: 3
 ---
-
-```danger
-## Under Construction
-This guide is currently being updated for the <strong>Fall 2025</strong> semester. Please note that some screenshots or terminal commands may change before the final release.
-```
-
 # Assignment 3: Robot Localization
 
 In this assignment, you will move from deterministic planning to **Probabilistic Robotics**. You will implement a **3D Discrete Bayes Filter** (Histogram Filter) to estimate the pose of a robot in a known environment using noisy odometry and landmark sightings. Your task is to maintain a probability distribution (belief) that accurately tracks the robot's ground truth position.
