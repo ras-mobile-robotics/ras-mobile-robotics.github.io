@@ -160,7 +160,7 @@ ros2 launch ras598_assignment_2 bayes_launch.py
 ```
 
 ## 6.2. Visualization Standards
-Since 3D arrays cannot be viewed directly, you must project your belief for RViz. To represent a 3D belief grid (X, Y, and Theta) as a 2D costmap in ROS, the function performs a marginalization of the orientation axis.
+Since 3D arrays cannot be viewed directly, you must project your belief for RViz. To represent a 3D belief grid (X, Y, and Theta) as a 2D costmap in ROS, you would need to perform a marginalization of the orientation axis.
 
 | Type | Topic Name | Message Type | Description |
 | :--- | :--- | :--- | :--- |
