@@ -181,7 +181,7 @@ Since 3D arrays cannot be viewed directly, you must project your belief for RViz
 | **Coordinate Mapping (2 pts)** | Correct implementation of `real_to_grid` and `grid_to_real`. |
 | **Motion Model (5 pts)** | The belief moves correctly with the robot's motion. If the robot moves up, the "cloud" of probability should move up as well. |
 | **Measurement Model (5 pts)** | Landmark sightings correctly collapse the "cloud" into a distinct or multi-modal peaks. |
-| **Convergence (2 pts)** | After seeing 2-3 landmarks, the peak of your belief should be within $$0.5\text{m}$$ of the Ground Truth. |
+| **Convergence (2 pts)** | After seeing 2-3 landmarks, the peak of your belief should be within $$0.6\text{m}$$ of the Ground Truth. |
 | **Explanation (1 pt)** | (Max 200 words) Explain why the probability distribution is ring-ish shaped, ellipse or some other shape with screenshots of the respective probability distribution. |
 
 ### 7.2 Viva Voce (Penalty Only)
