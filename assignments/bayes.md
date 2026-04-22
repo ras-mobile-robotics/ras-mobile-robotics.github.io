@@ -175,6 +175,7 @@ Since 3D arrays cannot be viewed directly, you must project your belief for RViz
 ## 7. Evaluation Criteria & Rubric
 
 ### 7.1 Technical Implementation (15 Points)
+
 | Criteria | Description |
 | :--- | :--- |
 | **Coordinate Mapping (2 pts)** | Correct implementation of `real_to_grid` and `grid_to_real`. |
