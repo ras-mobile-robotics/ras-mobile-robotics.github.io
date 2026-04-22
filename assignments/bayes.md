@@ -51,6 +51,8 @@ When the robot's sensor detects a landmark, it provides a measurement $$z = [r, 
 
 In your filter, you will compare these values against every cell $$(x, y, \theta)$$ in your belief grid. A cell is considered "highly probable" if a robot placed there would see the landmark at a similar distance and angle.
 
+While the measurement model discussed in class accounts for four distinct sources of error, this assignment employs a simplified model that applies a Gaussian distribution around the ground truth value.
+
 > **Note:** Because the world is symmetric, a single range measurement creates a "ring" of probability. It is only by incorporating the **Bearing** and the robot's hypothetical orientation **$$\theta$$** that you can collapse this ring into a single estimated pose over multiple measurement steps.
 
 ---
@@ -62,13 +64,6 @@ The `stage_ros2` node emits a `/fiducials` message whenever a landmark is within
 
 
 > Note: To find the message type, you may use `ros2 topic info /fiducials`, and to find the message structure, use `ros2 interface show <message_type>`.
-
-
-    ### Implementation Note for Students
-In your `fiducial_callback`, you will use the **Range** ($r$) and **Bearing** ($\phi$) provided by the sensor. 
-* **Range ($r$):** The length of the red line.
-* **Bearing ($\phi$):** The angle of the red line relative to the robot's current heading.
-
 
 ## 3. System Architecture
 
@@ -107,7 +102,8 @@ The Stage world uses a global coordinate system where the center is $$(0,0)$$, m
 
 ### 4.3 Gotchas
 
-* **Visualization:** Use the `viz/odom_path` topic to visualize the robot's estimated trajectory in RViz. Do **not** use the raw `/odom` topic for visualization, as it may not align with your grid's coordinate frame.
+* **Noise Parameters**: To model uncertainty, apply the Gaussian function `scipy.ndimage.gaussian_filter`. The specific covariance, or $$\sigma$$ values, used in this operation must be carefully tuned to reflect the actual noise levels observed in your odometry and sensor models, ensuring that the filter's uncertainty growth aligns with your experimental results and error analysis.
+* **Visualization:** Use the `viz/odom_path` topic to visualize the robot's estimated trajectory in RViz. Do **NOT** use the raw `/odom` topic for visualization, as it may not align with your grid's coordinate frame.
 * **Ground Truth** The Ground Truth topic (`/ground_truth`) is provided strictly for performance analysis and path visualization. It **must not** be used as an input to your Bayes Filter calculations. The filter should only "see" what a real robot would: noisy odometry and landmark sightings.
 
 ---
@@ -121,22 +117,26 @@ We will be using the Stage simulator, a lightweight alternative to Gazebo. Follo
 
 ```
 cd ~/ros_ws/src
-git clone https://github.com/ras-mobile-robotics/stage_ros2.git
 
+# Remove old stage_ros2 repo
+rm -rf stage_ros2
 
+# Pull the repo with the new branch 'bayes'
+git clone -b bayes https://github.com/ras-mobile-robotics/stage_ros2.git
+
+# Build
 cd ~/ros_ws
 colcon build
 ```
 
 ### 5.2. Boiler Plate Code
 
-> Note: You may change the boiler plate code in any manner, as long as it satisifies the deliverables.
+> Note: You can change the boiler plate code in any manner, as long as it satisifies the deliverables.
 
 ```bash
 cd ~/ros_ws/src
 git clone https://github.com/ras-mobile-robotics/ras598_assignment_3.git
 ```
-
 
 ##### File Structure
 - `bayes.py`: The launch file that launches **map_server** (used for visualizing the map in RViz) and the **grading scout**.
@@ -166,7 +166,7 @@ ros2 launch ras598_assignment_2 bayes_launch.py
 ```
 
 ## 6.2. Visualization Standards
-Since 3D arrays cannot be viewed directly, you must project your belief for RViz:
+Since 3D arrays cannot be viewed directly, you must project your belief for RViz. To represent a 3D belief grid (X, Y, and Theta) as a 2D costmap in ROS, the function performs a marginalization of the orientation axis.
 
 | Type | Topic Name | Message Type | Description |
 | :--- | :--- | :--- | :--- |
@@ -174,6 +174,7 @@ Since 3D arrays cannot be viewed directly, you must project your belief for RViz
 | **Publisher** | `viz/landmarks` | `MarkerArray` | 3D Cylinders showing landmark positions parsed from the Stage configuration world file. |
 | **Publisher** | `viz/gt_path` | `Path` | A Green line showing the true trajectory from `/ground_truth`. |
 | **Publisher** | `viz/odom_path` | `Path` | A Red line showing the raw, uncorrected odometry. |
+
 
 ---
 
@@ -195,4 +196,5 @@ The Viva Voce is a **mandatory** defense of your code. Failure to explain the fo
 * **Scenario:** Explain various scenarios discussed in class with respect to your implementation (kidnapped robot, uniform initial belief, grid resolution trade offs, etc)
 
 > **Note on Authenticity**: Whether you wrote every line from scratch or used an LLM as a collaborator, you are expected to understand your script. While forgetting the specific syntax of a rare NumPy function is excusable, failing to explain a logic block or a specific function call that appears multiple times in your code suggests a lack of understanding and will be penalized.
+
 ---
