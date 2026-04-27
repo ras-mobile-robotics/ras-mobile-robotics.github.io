@@ -2,7 +2,7 @@
 layout: default
 title: "Ethics"
 parent: Tutorials
-sort: 13
+sort: 15
 ---
 
 # Handout: Formal Methods for Ethical Engineering
