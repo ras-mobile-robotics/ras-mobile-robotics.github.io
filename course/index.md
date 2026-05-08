@@ -28,12 +28,12 @@ Poly - ISTB12, Room 212
 ---
 
 # Team Project
-- [Active Perception for Accurate Object Localization and Navigation ](https://seasonedleo.github.io/RAS_Mobile_Robotics_Vision/project/report1.html) | Active Perception
+- [Active Perception for Accurate Object Localization and Navigation ](https://seasonedleo.github.io/RAS_Mobile_Robotics_Vision/project/) | Active Perception
 - [VLN-Based Semantic Exploration](https://akshayajeyaprakash.github.io/Project_ATOM_RAS598/) | Atom
-- [Autonomous Frontier Exploration with Semantic Hazard Mapping](https://pricolon.github.io/mobile-robotics-frontier-exploration/milestones/milestone1_proposal) | Group 1
+- [Autonomous Frontier Exploration with Semantic Hazard Mapping](https://pricolon.github.io/mobile-robotics-frontier-exploration/) | Group 1
 - [Semantic Fetch Robot](https://suyash-asu.github.io/semantic_fetch_robot/)| Group 2
-- [Vision-Based Person-Following Mobile Robot](https://github.com/Hp092/Autonomous-Human-Following-Mobile-Robot) | Group 3
-- [Autonomous Mobile Manipulation System](https://varad1722.github.io/Mobile_Robotics/project/report1.html)|  Group 4
+- [Autonomous Human-Following Mobile Robot](https://hp092.github.io/Autonomous-Human-Following-Mobile-Robot/) | Group 3
+- [Autonomous Mobile Manipulation System](https://varad1722.github.io/Mobile_Robotics/project/)|  Group 4
 - [Wolf and Rabbit](https://abc-mobile-robotics.github.io/) | Palantir
 - [Turtleman: The PacManBot!!!](https://hogintosh.github.io/PacManBot/)| The Cool Team
 - [SmartFollower & Tracker (SFT) for Warehouse Anomaly Investigation](https://mobile-robots-ugv.github.io/) | Unitled Group
