@@ -20,7 +20,7 @@ Poly - ISTB12, Room 212
 
 - First Day of Classes: January 12, 2026
 - Last Day of Classes:  Apr 29, 2026
-- Final Project: May 6, 2026
+- Final Project: May 8, 2026
 
 <!-- ## Schedule 
 {{ policy.content | markdownify }} -->
